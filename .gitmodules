@@ -4,3 +4,6 @@
 [submodule "pcb/libs/Keebio-Parts.pretty"]
 	path = pcb/libs/Keebio-Parts.pretty
 	url = git@github.com:keebio/Keebio-Parts.pretty.git
+[submodule "pcb/libs/keyboard_parts.pretty"]
+	path = pcb/libs/keyboard_parts.pretty
+	url = https://github.com/colemarkham/keyboard_parts.pretty
