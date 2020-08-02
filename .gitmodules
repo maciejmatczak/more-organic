@@ -7,3 +7,6 @@
 [submodule "pcb/libs/keyboard_parts.pretty"]
 	path = pcb/libs/keyboard_parts.pretty
 	url = https://github.com/colemarkham/keyboard_parts.pretty
+[submodule "pcb/libs/keyswitches.pretty"]
+	path = pcb/libs/keyswitches.pretty
+	url = https://github.com/maciejmatczak/keyswitches.pretty
