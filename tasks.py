@@ -2,7 +2,7 @@ from invoke import task
 from pathlib import Path
 
 
-PROJECT = 'knobs'
+PROJECT = 'more-organic'
 FAB = './FAB'
 
 # look out for slug genertion!
