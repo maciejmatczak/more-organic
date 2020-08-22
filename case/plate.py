@@ -53,10 +53,19 @@ def case(design):
 
     # plate += switch_bboxes + collisions
 
-    # plate = linear_extrude(1.6)(plate)
+    plate = linear_extrude(1.6)(plate)
 
-    # mirror, as kicad uses y in opposite direction
-    return mirror([0, 1, 0])(plate + (switch_bboxes + collisions))
+    design_scad = projection(cut=True)(
+        # mirror, as kicad uses y in opposite direction
+        mirror([0, 1, 0])(
+            plate + (switch_bboxes + collisions)
+        )
+    )
+    # design_scad = mirror([0, 1, 0])(
+    #     plate + (switch_bboxes + collisions)
+    # )
+
+    return design_scad
 
 
 if __name__ == '__main__':

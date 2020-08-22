@@ -1,12 +1,15 @@
 .PHONY: watch-case all dev
 
 
-all: images/plate.png
+all: images/plate.png build/case/plate.dxf
 
 
 images/plate.png: build/case/plate.scad
 	mkdir -p images
 	openscad --colorscheme DeepOcean -o images/plate.png build/case/plate.scad
+
+build/case/plate.dxf: build/case/plate.scad
+	openscad -o build/case/plate.dxf build/case/plate.scad
 
 build/case/plate.scad: build/design/design.json $(wildcard case/*.py)
 	mkdir -p build/case
