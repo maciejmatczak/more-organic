@@ -278,7 +278,7 @@ U 1 1 5F33BE17
 P 5700 1000
 F 0 "SW1" H 5700 1300 50  0000 C CNN
 F 1 "SW_Push" H 5700 1200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 5700 1200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 5700 1200 50  0001 C CNN
 F 3 "~" H 5700 1200 50  0001 C CNN
 	1    5700 1000
 	1    0    0    -1  
@@ -304,7 +304,7 @@ U 1 1 5F33BE25
 P 6700 1000
 F 0 "SW2" H 6700 1300 50  0000 C CNN
 F 1 "SW_Push" H 6700 1200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 6700 1200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 6700 1200 50  0001 C CNN
 F 3 "~" H 6700 1200 50  0001 C CNN
 	1    6700 1000
 	1    0    0    -1  
@@ -330,7 +330,7 @@ U 1 1 5F33BE33
 P 7700 1000
 F 0 "SW3" H 7700 1300 50  0000 C CNN
 F 1 "SW_Push" H 7700 1200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 7700 1200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 7700 1200 50  0001 C CNN
 F 3 "~" H 7700 1200 50  0001 C CNN
 	1    7700 1000
 	1    0    0    -1  
@@ -356,7 +356,7 @@ U 1 1 5F33BE41
 P 8700 1000
 F 0 "SW4" H 8700 1300 50  0000 C CNN
 F 1 "SW_Push" H 8700 1200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 8700 1200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 8700 1200 50  0001 C CNN
 F 3 "~" H 8700 1200 50  0001 C CNN
 	1    8700 1000
 	1    0    0    -1  
@@ -382,7 +382,7 @@ U 1 1 5F33BE4F
 P 9700 1000
 F 0 "SW5" H 9700 1300 50  0000 C CNN
 F 1 "SW_Push" H 9700 1200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 9700 1200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 9700 1200 50  0001 C CNN
 F 3 "~" H 9700 1200 50  0001 C CNN
 	1    9700 1000
 	1    0    0    -1  
@@ -408,7 +408,7 @@ U 1 1 5F33BE5D
 P 10700 1000
 F 0 "SW6" H 10700 1300 50  0000 C CNN
 F 1 "SW_Push" H 10700 1200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 10700 1200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 10700 1200 50  0001 C CNN
 F 3 "~" H 10700 1200 50  0001 C CNN
 	1    10700 1000
 	1    0    0    -1  
@@ -434,7 +434,7 @@ U 1 1 5F33BE6B
 P 5700 2000
 F 0 "SW7" H 5700 2300 50  0000 C CNN
 F 1 "SW_Push" H 5700 2200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 5700 2200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 5700 2200 50  0001 C CNN
 F 3 "~" H 5700 2200 50  0001 C CNN
 	1    5700 2000
 	1    0    0    -1  
@@ -460,7 +460,7 @@ U 1 1 5F33BE79
 P 6700 2000
 F 0 "SW8" H 6700 2300 50  0000 C CNN
 F 1 "SW_Push" H 6700 2200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 6700 2200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 6700 2200 50  0001 C CNN
 F 3 "~" H 6700 2200 50  0001 C CNN
 	1    6700 2000
 	1    0    0    -1  
@@ -486,7 +486,7 @@ U 1 1 5F33BE87
 P 7700 2000
 F 0 "SW9" H 7700 2300 50  0000 C CNN
 F 1 "SW_Push" H 7700 2200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 7700 2200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 7700 2200 50  0001 C CNN
 F 3 "~" H 7700 2200 50  0001 C CNN
 	1    7700 2000
 	1    0    0    -1  
@@ -512,7 +512,7 @@ U 1 1 5F33BE95
 P 8700 2000
 F 0 "SW10" H 8700 2300 50  0000 C CNN
 F 1 "SW_Push" H 8700 2200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 8700 2200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 8700 2200 50  0001 C CNN
 F 3 "~" H 8700 2200 50  0001 C CNN
 	1    8700 2000
 	1    0    0    -1  
@@ -538,7 +538,7 @@ U 1 1 5F33BEA3
 P 9700 2000
 F 0 "SW11" H 9700 2300 50  0000 C CNN
 F 1 "SW_Push" H 9700 2200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 9700 2200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 9700 2200 50  0001 C CNN
 F 3 "~" H 9700 2200 50  0001 C CNN
 	1    9700 2000
 	1    0    0    -1  
@@ -564,7 +564,7 @@ U 1 1 5F33BEB1
 P 10700 2000
 F 0 "SW12" H 10700 2300 50  0000 C CNN
 F 1 "SW_Push" H 10700 2200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 10700 2200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 10700 2200 50  0001 C CNN
 F 3 "~" H 10700 2200 50  0001 C CNN
 	1    10700 2000
 	1    0    0    -1  
@@ -607,7 +607,7 @@ U 1 1 5F33BECA
 P 5700 3000
 F 0 "SW13" H 5700 3300 50  0000 C CNN
 F 1 "SW_Push" H 5700 3200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 5700 3200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 5700 3200 50  0001 C CNN
 F 3 "~" H 5700 3200 50  0001 C CNN
 	1    5700 3000
 	1    0    0    -1  
@@ -633,7 +633,7 @@ U 1 1 5F33BED8
 P 6700 3000
 F 0 "SW14" H 6700 3300 50  0000 C CNN
 F 1 "SW_Push" H 6700 3200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 6700 3200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 6700 3200 50  0001 C CNN
 F 3 "~" H 6700 3200 50  0001 C CNN
 	1    6700 3000
 	1    0    0    -1  
@@ -659,7 +659,7 @@ U 1 1 5F33BEE6
 P 7700 3000
 F 0 "SW15" H 7700 3300 50  0000 C CNN
 F 1 "SW_Push" H 7700 3200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 7700 3200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 7700 3200 50  0001 C CNN
 F 3 "~" H 7700 3200 50  0001 C CNN
 	1    7700 3000
 	1    0    0    -1  
@@ -685,7 +685,7 @@ U 1 1 5F33BEF4
 P 8700 3000
 F 0 "SW16" H 8700 3300 50  0000 C CNN
 F 1 "SW_Push" H 8700 3200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 8700 3200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 8700 3200 50  0001 C CNN
 F 3 "~" H 8700 3200 50  0001 C CNN
 	1    8700 3000
 	1    0    0    -1  
@@ -711,7 +711,7 @@ U 1 1 5F33BF02
 P 9700 3000
 F 0 "SW17" H 9700 3300 50  0000 C CNN
 F 1 "SW_Push" H 9700 3200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 9700 3200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 9700 3200 50  0001 C CNN
 F 3 "~" H 9700 3200 50  0001 C CNN
 	1    9700 3000
 	1    0    0    -1  
@@ -737,7 +737,7 @@ U 1 1 5F33BF10
 P 10700 3000
 F 0 "SW18" H 10700 3300 50  0000 C CNN
 F 1 "SW_Push" H 10700 3200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 10700 3200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 10700 3200 50  0001 C CNN
 F 3 "~" H 10700 3200 50  0001 C CNN
 	1    10700 3000
 	1    0    0    -1  
@@ -763,7 +763,7 @@ U 1 1 5F33BF1E
 P 5700 4000
 F 0 "SW19" H 5700 4300 50  0000 C CNN
 F 1 "SW_Push" H 5700 4200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 5700 4200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 5700 4200 50  0001 C CNN
 F 3 "~" H 5700 4200 50  0001 C CNN
 	1    5700 4000
 	1    0    0    -1  
@@ -789,7 +789,7 @@ U 1 1 5F33BF2C
 P 6700 4000
 F 0 "SW20" H 6700 4300 50  0000 C CNN
 F 1 "SW_Push" H 6700 4200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 6700 4200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 6700 4200 50  0001 C CNN
 F 3 "~" H 6700 4200 50  0001 C CNN
 	1    6700 4000
 	1    0    0    -1  
@@ -815,7 +815,7 @@ U 1 1 5F33BF3A
 P 7700 4000
 F 0 "SW21" H 7700 4300 50  0000 C CNN
 F 1 "SW_Push" H 7700 4200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 7700 4200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 7700 4200 50  0001 C CNN
 F 3 "~" H 7700 4200 50  0001 C CNN
 	1    7700 4000
 	1    0    0    -1  
@@ -841,7 +841,7 @@ U 1 1 5F33BF48
 P 8700 4000
 F 0 "SW22" H 8700 4300 50  0000 C CNN
 F 1 "SW_Push" H 8700 4200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 8700 4200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 8700 4200 50  0001 C CNN
 F 3 "~" H 8700 4200 50  0001 C CNN
 	1    8700 4000
 	1    0    0    -1  
@@ -867,7 +867,7 @@ U 1 1 5F33BF56
 P 9700 4000
 F 0 "SW23" H 9700 4300 50  0000 C CNN
 F 1 "SW_Push" H 9700 4200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 9700 4200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 9700 4200 50  0001 C CNN
 F 3 "~" H 9700 4200 50  0001 C CNN
 	1    9700 4000
 	1    0    0    -1  
@@ -893,7 +893,7 @@ U 1 1 5F33BF64
 P 10700 4000
 F 0 "SW24" H 10700 4300 50  0000 C CNN
 F 1 "SW_Push" H 10700 4200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 10700 4200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 10700 4200 50  0001 C CNN
 F 3 "~" H 10700 4200 50  0001 C CNN
 	1    10700 4000
 	1    0    0    -1  
@@ -919,7 +919,7 @@ U 1 1 5F33BF72
 P 5700 5000
 F 0 "SW25" H 5700 5300 50  0000 C CNN
 F 1 "SW_Push" H 5700 5200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 5700 5200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 5700 5200 50  0001 C CNN
 F 3 "~" H 5700 5200 50  0001 C CNN
 	1    5700 5000
 	1    0    0    -1  
@@ -945,7 +945,7 @@ U 1 1 5F33BF80
 P 6700 5000
 F 0 "SW26" H 6700 5300 50  0000 C CNN
 F 1 "SW_Push" H 6700 5200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 6700 5200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 6700 5200 50  0001 C CNN
 F 3 "~" H 6700 5200 50  0001 C CNN
 	1    6700 5000
 	1    0    0    -1  
@@ -971,7 +971,7 @@ U 1 1 5F33BF8E
 P 7700 5000
 F 0 "SW27" H 7700 5300 50  0000 C CNN
 F 1 "SW_Push" H 7700 5200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 7700 5200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 7700 5200 50  0001 C CNN
 F 3 "~" H 7700 5200 50  0001 C CNN
 	1    7700 5000
 	1    0    0    -1  
@@ -997,7 +997,7 @@ U 1 1 5F33BF9C
 P 8700 5000
 F 0 "SW28" H 8700 5300 50  0000 C CNN
 F 1 "SW_Push" H 8700 5200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 8700 5200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 8700 5200 50  0001 C CNN
 F 3 "~" H 8700 5200 50  0001 C CNN
 	1    8700 5000
 	1    0    0    -1  
@@ -1023,7 +1023,7 @@ U 1 1 5F33BFAA
 P 9700 5000
 F 0 "SW29" H 9700 5300 50  0000 C CNN
 F 1 "SW_Push" H 9700 5200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 9700 5200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 9700 5200 50  0001 C CNN
 F 3 "~" H 9700 5200 50  0001 C CNN
 	1    9700 5000
 	1    0    0    -1  
@@ -1049,7 +1049,7 @@ U 1 1 5F33BFB8
 P 10700 5000
 F 0 "SW30" H 10700 5300 50  0000 C CNN
 F 1 "SW_Push" H 10700 5200 50  0000 C CNN
-F 2 "keyswitches:SW_MX_reversible" H 10700 5200 50  0001 C CNN
+F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 10700 5200 50  0001 C CNN
 F 3 "~" H 10700 5200 50  0001 C CNN
 	1    10700 5000
 	1    0    0    -1  

@@ -1,4 +1,4 @@
-19077655610025422
+19079252312720422
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -83840,6 +83840,13 @@ MX,cherry,gateron,kailh,pg1511,socket
 2
 keyswitches
 Kailh_socket_MX_optional_reversible
+MX-style keyswitch with support for reversible optional Kailh socket
+MX,cherry,gateron,kailh,pg1511,socket
+0
+8
+2
+keyswitches
+Kailh_socket_MX_optional_reversible_alt
 MX-style keyswitch with support for reversible optional Kailh socket
 MX,cherry,gateron,kailh,pg1511,socket
 0
