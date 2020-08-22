@@ -38,6 +38,7 @@ for m in board.GetModules():
 
     coords = placement.get('coords')
     orient = placement.get('orient')
+    rotate = placement.get('rotate')
 
     if coords:
         m.SetPosition(pcbnew.wxPointMM(
@@ -48,9 +49,14 @@ for m in board.GetModules():
     if orient:
         m.SetOrientation(orient*10)
 
-    # if name.startswith('SW'):
-    #     print(name)
+    if rotate:
+        anchor = rotate['anchor']
+        m.Rotate(
+            pcbnew.wxPointMM(anchor[0], anchor[1]),
+            rotate['angle']*10
+        )
 
+    # if name.startswith('SW25'):
     #     try:
     #         coord = placement_config[name]
     #     except KeyError:
