@@ -16,8 +16,8 @@ First step was to somehow define and parametrize the design itself and save that
 
 Based on base design (switch coordinates), with use of SolidPython, the plate design is generated:
 
-![Openscad plate](images/plate.png)
+![Openscad plate](images/case.png)
 
 Additionally, a collisions are shown in red (need of a manual validation):
 
-![Openscad plate](images/plate-collision.png)
+![Openscad plate](images/case-collision.png)

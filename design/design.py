@@ -66,16 +66,16 @@ def design():
 
             cfg[f'D{i}'] = diode
 
-    # TRRS
-    cfg['U2'] = Element(
-        x=104.15,
-        y=53.95
-    )
-
     # Arduino Pro Micro
     cfg['U1'] = Element(
-        x=88.5,
-        y=70
+        x=OFFSET[0]-28,
+        y=OFFSET[1]+10
+    )
+
+    # TRRS
+    cfg['U2'] = Element(
+        x=OFFSET[0]-45,
+        y=OFFSET[1]+.6
     )
 
     # thumb left key
