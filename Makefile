@@ -1,31 +1,27 @@
 .PHONY: watch-case all dev
 
 
-all: images/plate.png build/case/plate.dxf
+all: build/case/case.png build/case/pcb.dxf build/case/plate.dxf
 
 
-images/plate.png: build/case/plate.scad
-	mkdir -p images
-	openscad --colorscheme DeepOcean -o images/plate.png build/case/plate.scad
-
+build/case/case.png: build/case/case.scad
+	openscad --colorscheme DeepOcean -o $@ $<
+build/case/pcb.dxf: build/case/pcb.scad
+	openscad -o  $@ $<
 build/case/plate.dxf: build/case/plate.scad
-	openscad -o build/case/plate.dxf build/case/plate.scad
+	openscad -o  $@ $<
 
-build/case/plate.scad: build/design/design.json $(wildcard case/*.py)
+build/case/case.scad: build/design/design.json $(wildcard case/*.py)
 	mkdir -p build/case
-	case/plate.py build/design/design.json build/case/plate.scad
+	case/case.py $< build/case
 
 
 build/design/design.json: design/design.py
 	mkdir -p build/design
-	design/design.py build/design/design.json
+	$< $@
 
 watch-case:
-	watchmedo shell-command -R\
-		build\
-		case\
-		design\
-		-c 'make build/case/plate.scad'
+	watch -n1 make
 
 dev:
 	git submodule update --init --recursive
