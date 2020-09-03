@@ -8,6 +8,30 @@ from pathlib import Path
 import json
 
 
+OFFSET = (0, 0)
+
+COLUMN_OFFSET = [
+    5, 0, -12, -8, 18, 23,
+]  # mm
+U = 19.05  # mm
+
+SCREWS_M4 = []
+Xes = (0, U * 4 + U/2)
+Yes = (-12, 98)
+for x in Xes:
+    for y in Yes:
+        SCREWS_M4.append((x, y))
+
+# helper for lower lefte M2 screws
+d = (COLUMN_OFFSET[0]-COLUMN_OFFSET[1])/2
+SCREWS_M2 = [
+    (U*1.5 - 3, COLUMN_OFFSET[1] - U/2 - 3),
+    (U*3.5 + 3, COLUMN_OFFSET[4] - U/2 - 3),
+    (U/2 + d, d + U*3.5),
+    (U*3.5 - 3, COLUMN_OFFSET[3] + U*3.5 + 3),
+]
+
+
 @dataclass
 class Element:
     x: float = 0
@@ -28,14 +52,6 @@ class Element:
     def move(self, x=0.0, y=0.0):
         self.x += x
         self.y += y
-
-
-OFFSET = (0, 0)
-
-COLUMN_OFFSET = [
-    5, 0, -12, -8, 18, 23,
-]  # mm
-U = 19.05  # mm
 
 
 def design():
@@ -125,6 +141,22 @@ def design():
 
     cfg['SW27'] = SW27
     cfg['D27'] = D27
+
+    for i, (x, y) in enumerate(SCREWS_M4):
+        screw = Element(
+            x=x,
+            y=y
+        )
+
+        cfg[f'SCREW_M4_{i}'] = screw
+
+    for i, (x, y) in enumerate(SCREWS_M2):
+        screw = Element(
+            x=x,
+            y=y
+        )
+
+        cfg[f'SCREW_M2_{i}'] = screw
 
     return cfg
 

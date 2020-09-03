@@ -8,18 +8,25 @@ from solid import *
 from solid.utils import *  # Not required, but the utils module is useful
 
 from switch import switch_cutout, switch_bbox
-from misc import arduino_pro_micro, trrs
+from misc import arduino_pro_micro, trrs, m4_hole, m4_screw, m2_hole, m2_screw
 
+
+OPENSCAD_HEADER = '$fa = 6;\n$fs = .1;'
 
 UNIT = 19.05
 
 PLATE_MELT_GROW = 16
-PLATE_MELT_SHRINK = 8
-PLATE_MELT_D = PLATE_MELT_GROW - PLATE_MELT_SHRINK
+PLATE_MELT_D = 6
+PLATE_MELT_SHRINK = PLATE_MELT_GROW - PLATE_MELT_D
 
 PCB_MELT_GROW = 16
-PCB_MELT_SHRINK = 12
-PCB_MELT_D = PCB_MELT_GROW - PCB_MELT_SHRINK
+PCB_MELT_D = 4
+PCB_MELT_SHRINK = PCB_MELT_GROW - PCB_MELT_D
+
+PCB_PLATE_Z = 5
+
+PCB_SCREW_M4_CLEARENCE = 4
+PCB_SCREW_M2_CLEARENCE = 2
 
 
 def melt(obj, grow, shrink):
@@ -47,15 +54,52 @@ def case(design):
 
         sw = translate([switch['x'], switch['y']])(sw)
 
-        sw_bbox = translate([switch['x'], switch['y'], 10])(sw_bbox)
+        sw_bbox = translate([switch['x'], switch['y'], PCB_PLATE_Z+5])(sw_bbox)
 
         switches_cutouts.append(sw)
         switch_bboxes.append(sw_bbox)
 
     # plate -  built directly from switch cutouts - organically melted
-    plate = melt(switches_cutouts, PLATE_MELT_GROW, PLATE_MELT_SHRINK)
+
+    m4_holes = []
+    m4_screws = []
+    for name, m4_hole_design in {k: el for k, el in design.items() if k.startswith('SCREW_M4')}.items():
+        m4_holes += translate(
+            [m4_hole_design['x'], m4_hole_design['y']]
+        )(m4_hole)
+
+        m4_screws += translate(
+            [m4_hole_design['x'], m4_hole_design['y']]
+        )(m4_screw)
+
+    m4_screws = up(PCB_PLATE_Z + 1.6 + .001)(m4_screws)
+
+    m4_holes_clearence = offset(PCB_SCREW_M4_CLEARENCE)(m4_holes)
+
+    plate = melt(switches_cutouts,
+                 PLATE_MELT_GROW, PLATE_MELT_SHRINK)
+
+    plate = melt(plate + m4_holes_clearence, 20, 20)
+
+    m2_holes = []
+    m2_screws = []
+    for name, m2_hole_design in {k: el for k, el in design.items() if k.startswith('SCREW_M2')}.items():
+        m2_holes += translate(
+            [m2_hole_design['x'], m2_hole_design['y']]
+        )(m2_hole)
+
+        m2_screws += translate(
+            [m2_hole_design['x'], m2_hole_design['y']]
+        )(m2_screw)
+
+    m2_holes_clearence = offset(PCB_SCREW_M2_CLEARENCE)(m2_holes)
+
+    m2_screws = up(PCB_PLATE_Z + 1.6 + .001)(m2_screws)
+
+    plate -= m4_holes
+    plate -= m2_holes
     plate -= switches_cutouts
-    plate = up(5)(
+    plate = up(PCB_PLATE_Z)(
         linear_extrude(1.6)(plate)
     )
 
@@ -70,25 +114,35 @@ def case(design):
     U1_arduino_pro_micro = translate([design['U1']['x'], design['U1']['y']])(
         arduino_pro_micro
     )
-    U2_trrs = translate([design['U2']['x'], design['U2']['y']])(
-        trrs
-    )
 
     # cutting on front - elements have to be on the edge, so we can't melt there
     U1_arduino_pro_micro_cut = intersection()(
         U1_arduino_pro_micro,
         translate([0, PCB_MELT_D])(U1_arduino_pro_micro)
     )
+
+    U2_trrs = copy(trrs)
     U2_trrs_cut = intersection()(
         U2_trrs,
         translate([0, PCB_MELT_D])(U2_trrs)
     )
+    if design['U2']['angle']:
+        U2_trrs = rotate(design['U2']['angle'])(U2_trrs)
+        U2_trrs_cut = rotate(design['U2']['angle'])(U2_trrs_cut)
 
-    pcb = down(5)(switches_cutouts)
+    U2_trrs = translate([design['U2']['x'], design['U2']['y']])(
+        U2_trrs
+    )
+    U2_trrs_cut = translate([design['U2']['x'], design['U2']['y']])(
+        U2_trrs_cut
+    )
+
     pcb = melt(
-        pcb + U1_arduino_pro_micro_cut + U2_trrs_cut,
+        switches_cutouts + U1_arduino_pro_micro_cut + U2_trrs_cut,
         PCB_MELT_GROW, PCB_MELT_SHRINK
     )
+    pcb = melt(pcb + m2_holes_clearence, 2, 2)
+    pcb -= m2_holes
 
     pcb = linear_extrude(1.6)(pcb)
 
@@ -101,10 +155,12 @@ def case(design):
 
     pcb = color([1, 1, .8, .5])(pcb)
     plate = color([.8, .85, 1, .5])(plate)
+    m4_screws = color([.3, .3, .3, .4])(m4_screws)
+    m2_screws = color([.3, .3, .3, .4])(m2_screws)
 
     # last union
     design_scad = pcb + plate + U1_arduino_pro_micro + \
-        U2_trrs + (switch_bboxes + collisions)
+        U2_trrs + (m4_screws + m2_screws + collisions + switch_bboxes)
 
     return mirror([0, 1, 0])(design_scad)
 
@@ -131,16 +187,22 @@ if __name__ == '__main__':
     # export separate pieces
 
     scad_render_to_file(
-        case_scad, args.output_path / 'case.scad', include_orig_code=True)
+        case_scad, args.output_path / 'case.scad',
+        file_header=OPENSCAD_HEADER,
+        include_orig_code=True)
 
     pcb_projection = projection(cut=True)(
         case_scad
     )
     scad_render_to_file(
-        pcb_projection, args.output_path / 'pcb.scad', include_orig_code=True)
+        pcb_projection, args.output_path / 'pcb.scad',
+        file_header=OPENSCAD_HEADER,
+        include_orig_code=True)
 
     plate_projection = projection(cut=True)(
         down(5)(case_scad)
     )
     scad_render_to_file(
-        plate_projection, args.output_path / 'plate.scad', include_orig_code=True)
+        plate_projection, args.output_path / 'plate.scad',
+        file_header=OPENSCAD_HEADER,
+        include_orig_code=True)
