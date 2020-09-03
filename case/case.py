@@ -15,16 +15,17 @@ OPENSCAD_HEADER = '$fa = 6;\n$fs = .1;'
 
 UNIT = 19.05
 
+# Plate design settings
 PLATE_MELT_GROW = 16
 PLATE_MELT_D = 6
 PLATE_MELT_SHRINK = PLATE_MELT_GROW - PLATE_MELT_D
 
+# PCB design settings
 PCB_MELT_GROW = 16
 PCB_MELT_D = 4
 PCB_MELT_SHRINK = PCB_MELT_GROW - PCB_MELT_D
 
 PCB_PLATE_Z = 5
-
 PCB_SCREW_M4_CLEARENCE = 4
 PCB_SCREW_M2_CLEARENCE = 2
 
@@ -33,12 +34,12 @@ def melt(obj, grow, shrink):
     return offset(-shrink)(offset(grow)(obj))
 
 
-def case(design):
+def make_switches(design):
     # keeps all bboxes of switches
     switch_bboxes = []
 
     # keeps all switches cutouts
-    switches_cutouts = []
+    switch_cutouts = []
 
     # going through all the design data about switches
     for name, switch in {k: el for k, el in design.items() if k.startswith('SW')}.items():
@@ -56,52 +57,49 @@ def case(design):
 
         sw_bbox = translate([switch['x'], switch['y'], PCB_PLATE_Z+5])(sw_bbox)
 
-        switches_cutouts.append(sw)
+        switch_cutouts.append(sw)
         switch_bboxes.append(sw_bbox)
+
+    return switch_cutouts, switch_bboxes
+
+
+def make_screws(design, prefix, screw_model, hole_model):
+    holes = []
+    screws = []
+    for name, design_data in {k: el for k, el in design.items() if k.startswith(prefix)}.items():
+        holes += translate(
+            [design_data['x'], design_data['y']]
+        )(hole_model)
+
+        screws += translate(
+            [design_data['x'], design_data['y']]
+        )(screw_model)
+
+    return screws, holes
+
+
+def case(design):
+    switch_cutouts, switch_bboxes = make_switches(design)
 
     # plate -  built directly from switch cutouts - organically melted
 
-    m4_holes = []
-    m4_screws = []
-    for name, m4_hole_design in {k: el for k, el in design.items() if k.startswith('SCREW_M4')}.items():
-        m4_holes += translate(
-            [m4_hole_design['x'], m4_hole_design['y']]
-        )(m4_hole)
-
-        m4_screws += translate(
-            [m4_hole_design['x'], m4_hole_design['y']]
-        )(m4_screw)
-
-    m4_screws = up(PCB_PLATE_Z + 1.6 + .001)(m4_screws)
-
+    m4_screws, m4_holes = make_screws(design, 'SCREW_M4', m4_screw, m4_hole)
     m4_holes_clearence = offset(PCB_SCREW_M4_CLEARENCE)(m4_holes)
 
-    plate = melt(switches_cutouts,
-                 PLATE_MELT_GROW, PLATE_MELT_SHRINK)
-
-    plate = melt(plate + m4_holes_clearence, 20, 20)
-
-    m2_holes = []
-    m2_screws = []
-    for name, m2_hole_design in {k: el for k, el in design.items() if k.startswith('SCREW_M2')}.items():
-        m2_holes += translate(
-            [m2_hole_design['x'], m2_hole_design['y']]
-        )(m2_hole)
-
-        m2_screws += translate(
-            [m2_hole_design['x'], m2_hole_design['y']]
-        )(m2_screw)
-
+    m2_screws, m2_holes = make_screws(design, 'SCREW_M2', m2_screw, m2_hole)
     m2_holes_clearence = offset(PCB_SCREW_M2_CLEARENCE)(m2_holes)
 
     m2_screws = up(PCB_PLATE_Z + 1.6 + .001)(m2_screws)
+    m4_screws = up(PCB_PLATE_Z + 1.6 + .001)(m4_screws)
 
-    plate -= m4_holes
-    plate -= m2_holes
-    plate -= switches_cutouts
-    plate = up(PCB_PLATE_Z)(
-        linear_extrude(1.6)(plate)
-    )
+    plate = melt(switch_cutouts,
+                 PLATE_MELT_GROW, PLATE_MELT_SHRINK)
+
+    plate = melt(plate + m4_holes_clearence, 20, 20)
+    # plate -= m4_holes
+    # plate -= m2_holes
+    plate -= switch_cutouts
+    plate = linear_extrude(1.6)(plate)
 
     # collisions - from switch bboxes, when it occures - it's painted red
     collisions = []
@@ -138,11 +136,11 @@ def case(design):
     )
 
     pcb = melt(
-        switches_cutouts + U1_arduino_pro_micro_cut + U2_trrs_cut,
+        switch_cutouts + U1_arduino_pro_micro_cut + U2_trrs_cut,
         PCB_MELT_GROW, PCB_MELT_SHRINK
     )
     pcb = melt(pcb + m2_holes_clearence, 2, 2)
-    pcb -= m2_holes
+    # pcb -= m2_holes
 
     pcb = linear_extrude(1.6)(pcb)
 
@@ -159,10 +157,19 @@ def case(design):
     m2_screws = color([.3, .3, .3, .4])(m2_screws)
 
     # last union
-    design_scad = pcb + plate + U1_arduino_pro_micro + \
-        U2_trrs + (m4_screws + m2_screws + collisions + switch_bboxes)
+    assembly =\
+        pcb +\
+        up(PCB_PLATE_Z)(plate) +\
+        U1_arduino_pro_micro +\
+        U2_trrs + m4_screws + m2_screws + collisions + switch_bboxes
 
-    return mirror([0, 1, 0])(design_scad)
+    # mirror on y to meet the KiCAD
+    elements = [
+        mirror([0, 1, 0])(model) for model in
+        [assembly, pcb, plate]
+    ]
+
+    return elements
 
 
 if __name__ == '__main__':
@@ -181,18 +188,18 @@ if __name__ == '__main__':
 
     design = json.loads(args.design_file.read_text())
 
-    case_scad = case(design)
+    assembly, pcb, plate = case(design)
 
     # 3 files - one main/full/assembly, for png, rest is used directly to use
     # export separate pieces
 
     scad_render_to_file(
-        case_scad, args.output_path / 'case.scad',
+        assembly, args.output_path / 'assembly.scad',
         file_header=OPENSCAD_HEADER,
         include_orig_code=True)
 
     pcb_projection = projection(cut=True)(
-        case_scad
+        pcb
     )
     scad_render_to_file(
         pcb_projection, args.output_path / 'pcb.scad',
@@ -200,7 +207,7 @@ if __name__ == '__main__':
         include_orig_code=True)
 
     plate_projection = projection(cut=True)(
-        down(5)(case_scad)
+        plate
     )
     scad_render_to_file(
         plate_projection, args.output_path / 'plate.scad',
