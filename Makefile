@@ -21,7 +21,7 @@ build/design/design.json: design/design.py
 	$< $@
 
 watch-case:
-	watch -n1 make
+	watch -n1 make build/case/case.scad
 
 dev:
 	git submodule update --init --recursive
