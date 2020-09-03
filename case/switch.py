@@ -35,7 +35,7 @@ switch_cutout = polygon(
     ]
 )
 
-switch_cutout = translate([-15.6/2, -15.6/2])(switch_cutout)
+switch_cutout = translate([-15.6/2, -14/2])(switch_cutout)
 switch_bbox = color([1, 1, 1, .2])(
     # adding dummy distance to avoid showing issues when 2 surfaces touches
     # each other
