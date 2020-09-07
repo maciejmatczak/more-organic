@@ -36,10 +36,10 @@ F 3 "" H 5950 7300 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Switch:SW_Push SW31
+L Switch:SW_Push SW_RESET1
 U 1 1 5F33BD98
 P 3850 6200
-F 0 "SW31" H 3850 6400 50  0000 C CNN
+F 0 "SW_RESET1" H 3850 6400 50  0000 C CNN
 F 1 "MX" H 3850 5900 60  0001 C CNN
 F 2 "Button_Switch_THT:SW_PUSH_6mm_H7.3mm" H 3850 6200 60  0001 C CNN
 F 3 "" H 3850 6200 60  0001 C CNN
@@ -991,84 +991,6 @@ Wire Wire Line
 	7500 5000 7400 5000
 Wire Wire Line
 	7900 5300 7900 5500
-$Comp
-L Switch:SW_Push SW28
-U 1 1 5F33BF9C
-P 8700 5000
-F 0 "SW28" H 8700 5300 50  0000 C CNN
-F 1 "SW_Push" H 8700 5200 50  0000 C CNN
-F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 8700 5200 50  0001 C CNN
-F 3 "~" H 8700 5200 50  0001 C CNN
-	1    8700 5000
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:D D28
-U 1 1 5F33BFA2
-P 8900 5150
-F 0 "D28" V 8950 5250 50  0000 L CNN
-F 1 "D" V 8900 5250 50  0000 L CNN
-F 2 "keebio-footprints:Diode-dual" H 8900 5150 50  0001 C CNN
-F 3 "~" H 8900 5150 50  0001 C CNN
-	1    8900 5150
-	0    1    -1   0   
-$EndComp
-Wire Wire Line
-	8500 5000 8400 5000
-Wire Wire Line
-	8900 5300 8900 5500
-$Comp
-L Switch:SW_Push SW29
-U 1 1 5F33BFAA
-P 9700 5000
-F 0 "SW29" H 9700 5300 50  0000 C CNN
-F 1 "SW_Push" H 9700 5200 50  0000 C CNN
-F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 9700 5200 50  0001 C CNN
-F 3 "~" H 9700 5200 50  0001 C CNN
-	1    9700 5000
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:D D29
-U 1 1 5F33BFB0
-P 9900 5150
-F 0 "D29" V 9950 5250 50  0000 L CNN
-F 1 "D" V 9900 5250 50  0000 L CNN
-F 2 "keebio-footprints:Diode-dual" H 9900 5150 50  0001 C CNN
-F 3 "~" H 9900 5150 50  0001 C CNN
-	1    9900 5150
-	0    1    -1   0   
-$EndComp
-Wire Wire Line
-	9500 5000 9400 5000
-Wire Wire Line
-	9900 5300 9900 5500
-$Comp
-L Switch:SW_Push SW30
-U 1 1 5F33BFB8
-P 10700 5000
-F 0 "SW30" H 10700 5300 50  0000 C CNN
-F 1 "SW_Push" H 10700 5200 50  0000 C CNN
-F 2 "keyswitches:Kailh_socket_MX_optional_reversible_alt" H 10700 5200 50  0001 C CNN
-F 3 "~" H 10700 5200 50  0001 C CNN
-	1    10700 5000
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:D D30
-U 1 1 5F33BFBE
-P 10900 5150
-F 0 "D30" V 10950 5250 50  0000 L CNN
-F 1 "D" V 10900 5250 50  0000 L CNN
-F 2 "keebio-footprints:Diode-dual" H 10900 5150 50  0001 C CNN
-F 3 "~" H 10900 5150 50  0001 C CNN
-	1    10900 5150
-	0    1    -1   0   
-$EndComp
-Wire Wire Line
-	10500 5000 10400 5000
-Wire Wire Line
-	10900 5300 10900 5500
 Wire Wire Line
 	10900 2500 9900 2500
 Connection ~ 6900 2500
@@ -1120,23 +1042,14 @@ Wire Wire Line
 Connection ~ 9900 4500
 Wire Wire Line
 	9900 4500 8900 4500
-Wire Wire Line
-	10900 5500 9900 5500
 Connection ~ 5900 5500
 Wire Wire Line
 	5900 5500 5700 5500
 Connection ~ 6900 5500
 Wire Wire Line
 	6900 5500 5900 5500
-Connection ~ 7900 5500
 Wire Wire Line
 	7900 5500 6900 5500
-Connection ~ 8900 5500
-Wire Wire Line
-	8900 5500 7900 5500
-Connection ~ 9900 5500
-Wire Wire Line
-	9900 5500 8900 5500
 Wire Wire Line
 	5400 5000 5400 4000
 Connection ~ 5400 2000
@@ -1181,18 +1094,12 @@ Wire Wire Line
 Connection ~ 8400 3000
 Wire Wire Line
 	8400 3000 8400 4000
-Connection ~ 8400 4000
-Wire Wire Line
-	8400 4000 8400 5000
-Wire Wire Line
-	9400 5000 9400 4000
 Connection ~ 9400 2000
 Wire Wire Line
 	9400 2000 9400 1000
 Connection ~ 9400 3000
 Wire Wire Line
 	9400 3000 9400 2000
-Connection ~ 9400 4000
 Wire Wire Line
 	9400 4000 9400 3000
 Wire Wire Line
@@ -1203,9 +1110,6 @@ Wire Wire Line
 Connection ~ 10400 3000
 Wire Wire Line
 	10400 3000 10400 4000
-Connection ~ 10400 4000
-Wire Wire Line
-	10400 4000 10400 5000
 Wire Wire Line
 	10400 1000 10200 1000
 Connection ~ 10400 1000
