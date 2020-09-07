@@ -6,9 +6,11 @@ import argparse
 from pathlib import Path
 from solid import *
 from solid.utils import *  # Not required, but the utils module is useful
+from solid import rotate as _rotate
 
 from switch import switch_cutout, switch_bbox
-from misc import arduino_pro_micro, trrs, m4_hole, m4_screw, m2_hole, m2_screw
+from misc import (arduino_pro_micro_2d, arduino_pro_micro_3d,
+                  trrs, m4_hole, m4_screw, m2_hole, m2_screw)
 
 
 OPENSCAD_HEADER = '$fa = 6;\n$fs = .1;'
@@ -28,6 +30,12 @@ PCB_MELT_SHRINK = PCB_MELT_GROW - PCB_MELT_D
 PCB_PLATE_Z = 5
 PCB_SCREW_M4_CLEARENCE = 4
 PCB_SCREW_M2_CLEARENCE = 2
+
+
+class rotate(_rotate):
+    def __init__(self, a: float = None, v: Vec3 = None) -> None:
+        a = -a
+        super().__init__(a=a, v=v)
 
 
 def melt(obj, grow, shrink):
@@ -109,14 +117,22 @@ def case(design):
     collisions = color(Red)(collisions)
 
     # other elements
-    U1_arduino_pro_micro = translate([design['U1']['x'], design['U1']['y']])(
-        arduino_pro_micro
+    U1_arduino_pro_micro = copy(arduino_pro_micro_3d)
+    # if design['U1']['angle']:
+    U1_arduino_pro_micro = rotate(
+        design['U1']['angle'])(U1_arduino_pro_micro)
+    U1_arduino_pro_micro = translate(
+        [design['U1']['x'], design['U1']['y']]
+    )(
+        U1_arduino_pro_micro
     )
+
+    U1_arduino_pro_micro_2d = projection(cut=True)(U1_arduino_pro_micro)
 
     # cutting on front - elements have to be on the edge, so we can't melt there
     U1_arduino_pro_micro_cut = intersection()(
-        U1_arduino_pro_micro,
-        translate([0, PCB_MELT_D])(U1_arduino_pro_micro)
+        U1_arduino_pro_micro_2d,
+        translate([0, PCB_MELT_D])(U1_arduino_pro_micro_2d)
     )
 
     U2_trrs = copy(trrs)
@@ -135,8 +151,18 @@ def case(design):
         U2_trrs_cut
     )
 
+    # adding some additional margin for rest of the smaller parts
+    reserved = translate(
+        [design['reserved']['x'], design['reserved']['y']]
+    )(
+        square(
+            [10, 20], center=True
+        )
+    )
+
     pcb = melt(
-        switch_cutouts + U1_arduino_pro_micro_cut + U2_trrs_cut,
+        switch_cutouts + U1_arduino_pro_micro_cut + U2_trrs_cut +
+        reserved,
         PCB_MELT_GROW, PCB_MELT_SHRINK
     )
     pcb = melt(pcb + m2_holes_clearence, 2, 2)
@@ -148,17 +174,21 @@ def case(design):
         melt(
             intersection()(
                 U1_arduino_pro_micro_cut,
-                translate([-3, 0])(U1_arduino_pro_micro)
+                translate([-3, 0])(U1_arduino_pro_micro_2d)
             )
             + U2_trrs_cut,
             PCB_MELT_GROW, PCB_MELT_SHRINK)
     )
 
     # shown elements + coloring
-    U1_arduino_pro_micro = color([.004, 58.0/255, 147.0/255, .5])(
-        up(2)(linear_extrude(1.6)(U1_arduino_pro_micro)))
+    # U1_arduino_pro_micro = color([.004, 58.0/255, 147.0/255, .5])(
+    #     up(2)(linear_extrude(1.6)(U1_arduino_pro_micro)))
     U2_trrs = color([.4, .4, .4, .5])(
         up(2)(linear_extrude(1.6)(U2_trrs))
+    )
+
+    reserved = color([.4, .4, .4, .5])(
+        up(2)(linear_extrude(1.6)(reserved))
     )
 
     pcb = color([1, 1, .8, .5])(pcb)
@@ -171,9 +201,9 @@ def case(design):
     assembly =\
         pcb +\
         up(PCB_PLATE_Z)(plate) +\
-        up(PCB_PLATE_Z)(cover) +\
-        U1_arduino_pro_micro +\
-        U2_trrs + m4_screws + m2_screws + collisions + switch_bboxes
+        up(PCB_PLATE_Z)(U1_arduino_pro_micro) +\
+        U2_trrs + m4_screws + m2_screws + collisions + switch_bboxes +\
+        up(PCB_PLATE_Z*2)(cover) + reserved
 
     # mirror on y to meet the KiCAD
     elements = [
