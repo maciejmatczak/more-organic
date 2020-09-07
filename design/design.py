@@ -44,9 +44,9 @@ class Element:
         px, py = self.x, self.y
 
         self.x = ax + math.cos(math.radians(angle)) * (px - ax) - \
-            math.sin(math.radians(angle)) * (py - ay)
-        self.y = ay + math.sin(math.radians(angle)) * (px - ax) + \
-            math.cos(math.radians(angle)) * (py - ay)
+            -math.sin(math.radians(angle)) * (py - ay)
+        self.y = ay - math.sin(math.radians(angle)) * (px - ax) + \
+            +math.cos(math.radians(angle)) * (py - ay)
 
         self.angle = angle
 
@@ -64,6 +64,8 @@ def design():
 
     cfg = {}
 
+    # x, y, angle
+    switches_coords = []
     for row in range(1, 5):
         for col in range(1, 7):
             i = 6*(row - 1) + col
@@ -75,40 +77,13 @@ def design():
 
             cfg[f'SW{i}'] = switch
 
-            diode = Element(
-                x=switch.x,
-                y=switch.y - U/2 + 1,
-            )
-            diode.rotate(180)
-
-            cfg[f'D{i}'] = diode
-
-    # Arduino Pro Micro
-    cfg['U1'] = Element(
-        x=OFFSET[0]-25,
-        y=OFFSET[1]+10
-    )
-
-    # TRRS
-    cfg['U2'] = Element(
-        x=OFFSET[0]-41,
-        y=OFFSET[1]+.6
-    )
-
     # thumb left key
     distance = 2.2
     SW25 = Element(
         x=OFFSET[0] + U * 0 - U/2 - distance,
         y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + distance,
-        angle=-15
+        angle=15
     )
-    D25 = Element(
-        x=SW25.x - U/2,
-        y=SW25.x
-    )
-    D25.rotate(-15, (SW25.x, SW25.y))
-
-    cfg['D25'] = D25
     cfg['SW25'] = SW25
 
     # thumb middle key
@@ -116,32 +91,50 @@ def design():
         x=OFFSET[0] + U * 1 - U/2,
         y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4,
     )
-    D26 = Element(
-        x=SW26.x,
-        y=SW26.y
-    )
     cfg['SW26'] = SW26
-    cfg['D26'] = D26
 
     # thumb right key
     distance = 3.5
     SW27 = Element(
         x=SW26.x + U,
         y=SW26.y,
-        angle=30
+        angle=-30
     )
-
-    D27 = Element(
-        x=SW27.x - U/2,
-        y=SW27.y
-    )
-    D27.rotate(30, (SW27.x, SW27.y))
-
     SW27.move(distance, 5)
-    D27.move(distance, 5)
-
     cfg['SW27'] = SW27
-    cfg['D27'] = D27
+
+    # following up with a diodes
+    for sw_name in [key for key in cfg.keys() if key.startswith('SW')]:
+        switch = cfg[sw_name]
+
+        i = sw_name[2:]
+
+        diode = Element(
+            x=switch.x,
+            y=switch.y - U/2 + 1,
+        )
+        diode.rotate(180 + switch.angle, anchor=(switch.x, switch.y))
+
+        cfg[f'D{i}'] = diode
+
+    # Arduino Pro Micro
+    cfg['U1'] = Element(
+        x=OFFSET[0]-24,
+        y=OFFSET[1]+17.8,
+        angle=-90
+    )
+
+    # TRRS
+    cfg['U2'] = Element(
+        x=OFFSET[0]-40,
+        y=OFFSET[1]+2
+    )
+
+    # some additional reserved space for the rest of an elements
+    cfg['reserved'] = Element(
+        x=cfg['U1'].x + 4,
+        y=cfg['U1'].y + 30
+    )
 
     for i, (x, y) in enumerate(SCREWS_M4):
         screw = Element(
