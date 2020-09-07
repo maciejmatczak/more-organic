@@ -1,7 +1,9 @@
-.PHONY: watch-case all dev
+.PHONY: watch-case dev all case
 
 
-all: build/case/assembly.png build/case/pcb.dxf build/case/plate.dxf
+all: case
+
+case: build/case/assembly.png build/case/pcb.dxf build/case/plate.dxf
 
 
 build/case/assembly.png: build/case/assembly.scad
