@@ -33,28 +33,19 @@ for m in board.GetModules():
     try:
         placement = placement_config.pop(name)
     except KeyError:
-        print(f'Footpring {name} not found in config!')
+        print(f'Footprint {name} not found in config!')
         continue
 
-    coords = placement.get('coords')
-    orient = placement.get('orient')
-    rotate = placement.get('rotate')
+    x = placement.get('x')
+    y = placement.get('y')
+    angle = placement.get('angle')
 
-    if coords:
-        m.SetPosition(pcbnew.wxPointMM(
-            coords[0],
-            coords[1],
-        ))
+    m.SetPosition(pcbnew.wxPointMM(
+        x,
+        y,
+    ))
 
-    if orient:
-        m.SetOrientation(orient*10)
-
-    if rotate:
-        anchor = rotate['anchor']
-        m.Rotate(
-            pcbnew.wxPointMM(anchor[0], anchor[1]),
-            rotate['angle']*10
-        )
+    m.SetOrientation(angle*10)
 
     # if name.startswith('SW25'):
     #     try:
@@ -76,17 +67,17 @@ for m in board.GetModules():
     #         coord[0]-19.05/2,
     #         coord[1],
     #     ))
-        # obj = m
-        # for attr in dir(obj):
-        #     print("obj.%s = %r" % (attr, getattr(obj, attr)))
-        # m.SetOrientation(900)
-        # m.Rotate(
-        #     pcbnew.wxPointMM(
-        #         coord[0]-19.05/2,
-        #         coord[1],
-        #     ),
-        #     90
-        # )
+    # obj = m
+    # for attr in dir(obj):
+    #     print("obj.%s = %r" % (attr, getattr(obj, attr)))
+    # m.SetOrientation(900)
+    # m.Rotate(
+    #     pcbnew.wxPointMM(
+    #         coord[0]-19.05/2,
+    #         coord[1],
+    #     ),
+    #     90
+    # )
 
     # footprint_id = m.GetFPID().GetUniStringLibId()
     # print(footprint_id)
