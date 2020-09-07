@@ -29,6 +29,7 @@ SCREWS_M2 = [
     (U*3.5 + 3, COLUMN_OFFSET[4] - U/2 - 3),
     (U/2 + d, d + U*3.5),
     (U*3.5 - 3, COLUMN_OFFSET[3] + U*3.5 + 3),
+    (-20, 30)
 ]
 
 
@@ -84,13 +85,13 @@ def design():
 
     # Arduino Pro Micro
     cfg['U1'] = Element(
-        x=OFFSET[0]-28,
+        x=OFFSET[0]-25,
         y=OFFSET[1]+10
     )
 
     # TRRS
     cfg['U2'] = Element(
-        x=OFFSET[0]-45,
+        x=OFFSET[0]-41,
         y=OFFSET[1]+.6
     )
 

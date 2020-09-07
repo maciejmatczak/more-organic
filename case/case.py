@@ -144,6 +144,16 @@ def case(design):
 
     pcb = linear_extrude(1.6)(pcb)
 
+    cover = linear_extrude(1.6)(
+        melt(
+            intersection()(
+                U1_arduino_pro_micro_cut,
+                translate([-3, 0])(U1_arduino_pro_micro)
+            )
+            + U2_trrs_cut,
+            PCB_MELT_GROW, PCB_MELT_SHRINK)
+    )
+
     # shown elements + coloring
     U1_arduino_pro_micro = color([.004, 58.0/255, 147.0/255, .5])(
         up(2)(linear_extrude(1.6)(U1_arduino_pro_micro)))
@@ -153,6 +163,7 @@ def case(design):
 
     pcb = color([1, 1, .8, .5])(pcb)
     plate = color([.8, .85, 1, .5])(plate)
+    cover = color([.8, .85, 1, .5])(cover)
     m4_screws = color([.3, .3, .3, .4])(m4_screws)
     m2_screws = color([.3, .3, .3, .4])(m2_screws)
 
@@ -160,6 +171,7 @@ def case(design):
     assembly =\
         pcb +\
         up(PCB_PLATE_Z)(plate) +\
+        up(PCB_PLATE_Z)(cover) +\
         U1_arduino_pro_micro +\
         U2_trrs + m4_screws + m2_screws + collisions + switch_bboxes
 
