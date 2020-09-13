@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
+from copy import copy
 import argparse
-from typing import Union, Tuple
+from typing import Union, Tuple, List
 import math
 from dataclasses import dataclass, asdict
 from pathlib import Path
@@ -15,26 +16,35 @@ COLUMN_OFFSET = [
 ]  # mm
 U = 19.05  # mm
 
-SCREWS_M4 = []
+# MOUNTING HOLES
+MH_STANDOFF = []
 Xes = (0, U * 4 + U/2)
 Yes = (-12, 98)
 for x in Xes:
     for y in Yes:
-        SCREWS_M4.append((x, y))
+        MH_STANDOFF.append((x, y))
 
-# helper for lower lefte M2 screws
+# helper for lower left M2 screws
 d = (COLUMN_OFFSET[0]-COLUMN_OFFSET[1])/2
-SCREWS_M2 = [
+MH_PCB_TO_PLATE = [
     (U*1.5 - 3, COLUMN_OFFSET[1] - U/2 - 3),
     (U*3.5 + 3, COLUMN_OFFSET[4] - U/2 - 3),
     (U/2 + d, d + U*3.5),
     (U*3.5 - 3, COLUMN_OFFSET[3] + U*3.5 + 3),
-    (-20, 30)
 ]
+
+MH_PCB_TO_SMALL_PLATE = [
+    (-20, 30),
+]
+
+MH_M2_FOOTPRINT = 'MountingHole_2.2mm_M2_Pad_Via'
+MH_M4_FOOTPRINT = 'MountingHole_4.3mm_M4_Pad_Via'
 
 
 @dataclass
 class Element:
+    name: str = ''
+    footprint: str = ''
     x: float = 0
     y: float = 0
     angle: float = 0
@@ -43,10 +53,10 @@ class Element:
         ax, ay = anchor
         px, py = self.x, self.y
 
-        self.x = ax + math.cos(math.radians(angle)) * (px - ax) - \
-            -math.sin(math.radians(angle)) * (py - ay)
+        self.x = ax + math.cos(math.radians(angle)) * (px - ax) + \
+            math.sin(math.radians(angle)) * (py - ay)
         self.y = ay - math.sin(math.radians(angle)) * (px - ax) + \
-            +math.cos(math.radians(angle)) * (py - ay)
+            math.cos(math.radians(angle)) * (py - ay)
 
         self.angle = angle
 
@@ -55,120 +65,148 @@ class Element:
         self.y += y
 
 
-def design():
+class Design:
+    def __init__(self) -> None:
+        self.elements: List[Element] = []
+
+    def add(self, element: Element):
+        self.elements.append(element)
+
+    def save(self, path: Path):
+        path.write_text(
+            json.dumps([asdict(el) for el in self.elements], indent=4)
+        )
+
+
+def design_sw_and_dio():
     # 30 switches, 1-24 are column staggered
     # for every switch 1 diode
     # U1 - arduino pro micro
     # U2 - TRRS
     # SW_RESET - reset switch
 
-    cfg = {}
+    design = Design()
 
     # x, y, angle
-    switches_coords = []
     for row in range(1, 5):
         for col in range(1, 7):
             i = 6*(row - 1) + col
 
             switch = Element(
+                name=f'SW{i}',
                 x=U * (col-1) + OFFSET[0],
                 y=U * (row-1) + COLUMN_OFFSET[col-1] + OFFSET[1]
             )
 
-            cfg[f'SW{i}'] = switch
+            design.add(switch)
 
     # thumb left key
     distance = 2.2
     SW25 = Element(
+        name='SW25',
         x=OFFSET[0] + U * 0 - U/2 - distance,
         y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + distance,
         angle=15
     )
-    cfg['SW25'] = SW25
+    design.add(SW25)
 
     # thumb middle key
     SW26 = Element(
+        name='SW26',
         x=OFFSET[0] + U * 1 - U/2,
         y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4,
     )
-    cfg['SW26'] = SW26
+    design.add(SW26)
 
     # thumb right key
     distance = 3.5
     SW27 = Element(
+        name='SW27',
         x=SW26.x + U,
         y=SW26.y,
         angle=-30
     )
     SW27.move(distance, 5)
-    cfg['SW27'] = SW27
+    design.add(SW27)
 
     # following up with a diodes
-    for sw_name in [key for key in cfg.keys() if key.startswith('SW')]:
-        switch = cfg[sw_name]
+    for switch in copy(design.elements):
+        sw_name = switch.name
 
         i = sw_name[2:]
 
         diode = Element(
+            name=f'D{i}',
             x=switch.x,
             y=switch.y - U/2 + 1,
         )
         diode.rotate(180 + switch.angle, anchor=(switch.x, switch.y))
 
-        cfg[f'D{i}'] = diode
+        design.add(diode)
 
-    # Arduino Pro Micro
-    cfg['U1'] = Element(
-        x=OFFSET[0]-24,
-        y=OFFSET[1]+17.8,
-        angle=-90
-    )
+    return design
 
-    # TRRS
-    cfg['U2'] = Element(
-        x=OFFSET[0]-40,
-        y=OFFSET[1]+2
-    )
 
-    # some additional reserved space for the rest of an elements
-    cfg['reserved'] = Element(
-        x=cfg['U1'].x + 4,
-        y=cfg['U1'].y + 30
-    )
-
-    for i, (x, y) in enumerate(SCREWS_M4):
+def design_mh_standoff():
+    design = Design()
+    for x, y in MH_STANDOFF:
         screw = Element(
+            footprint=MH_M4_FOOTPRINT,
             x=x,
             y=y
         )
 
-        cfg[f'SCREW_M4_{i}'] = screw
+        design.add(screw)
 
-    for i, (x, y) in enumerate(SCREWS_M2):
+    return design
+
+
+def design_mh_pcb_to_plate():
+    design = Design()
+    for x, y in MH_PCB_TO_PLATE:
         screw = Element(
+            footprint=MH_M2_FOOTPRINT,
             x=x,
             y=y
         )
 
-        cfg[f'SCREW_M2_{i}'] = screw
+        design.add(screw)
 
-    return cfg
+    return design
+
+
+def design_mh_pcb_to_small_plate():
+    design = Design()
+    for x, y in MH_PCB_TO_SMALL_PLATE:
+        screw = Element(
+            footprint=MH_M2_FOOTPRINT,
+            x=x,
+            y=y
+        )
+
+        design.add(screw)
+
+    return design
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='Creates json file with design data'
+        description='Creates json files with design data'
     )
     parser.add_argument(
         'output_path', type=lambda p: Path(p).resolve(),
-        help='Output path of the design file.'
+        help='Output path of the design folder.'
     )
     args = parser.parse_args()
 
-    cfg = design()
+    d = design_sw_and_dio()
+    d.save(args.output_path / 'sw_and_dio.json')
 
-    with args.output_path.open('w') as j:
-        cfg_tmp = {
-            key: asdict(value) for key, value in cfg.items()
-        }
-        json.dump(cfg_tmp, j, indent=4)
+    d = design_mh_standoff()
+    d.save(args.output_path / 'mh_standoff.json')
+
+    d = design_mh_pcb_to_plate()
+    d.save(args.output_path / 'mh_pcb_to_plate.json')
+
+    d = design_mh_pcb_to_small_plate()
+    d.save(args.output_path / 'mh_pcb_to_small_plate.json')
