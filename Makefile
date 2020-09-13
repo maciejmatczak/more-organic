@@ -1,21 +1,34 @@
-.PHONY: dev all case watch-case-assembly design pcb-place pcb-dump
+.PHONY: dev all design pcb-place pcb-dump
 
 
 all: case
 
 
-# case: build/case/assembly.png build/case/pcb.dxf build/case/plate.dxf
+.PHONY: case-assembly case-assembly-watch
+case-assembly: build/case/assembly.scad
+case-assembly-watch:
+	watch -n1 make case-assembly
 
-watch-case-assembly:
-	watch -n1 make assembly
+case: $(addprefix build/case/,\
+	assembly.png\
+	pcb.dxf\
+	plate.dxf\
+	cover.dxf\
+)
 
-# build/case/assembly.png: build/case/assembly.scad
-# 	openscad --colorscheme DeepOcean -o $@ $<
-# build/case/pcb.dxf: build/case/pcb.scad
-# 	openscad -o  $@ $<
-.PHONY: assembly
-assembly: build/case/assembly.scad
-build/case/assembly.scad: build/pcb/footprint_dump.json build/design/mh_standoff.json $(wildcard case/*.py)
+build/case/%.png: build/case/%.scad
+	openscad --colorscheme DeepOcean -o $@ $<
+
+build/case/%.dxf: build/case/%.scad
+	openscad -o $@ $<
+
+scad_files=$(addprefix build/case/,\
+	assembly.scad\
+	pcb.scad\
+	cover.scad\
+	plate.scad\
+)
+$(scad_files) &: build/pcb/footprint_dump.json build/design/mh_standoff.json $(wildcard case/*.py)
 	mkdir -p build/case
 	case/case.py\
 		--kicad-dump build/pcb/footprint_dump.json\
