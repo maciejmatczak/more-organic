@@ -34,7 +34,8 @@ MH_PCB_TO_PLATE = [
 ]
 
 MH_PCB_TO_SMALL_PLATE = [
-    (-20, 30),
+    (-35, 18),
+    (-25, 36),
 ]
 
 MH_M2_FOOTPRINT = 'MountingHole_2.2mm_M2_Pad_Via'
@@ -47,18 +48,18 @@ class Element:
     footprint: str = ''
     x: float = 0
     y: float = 0
-    angle: float = 0
+    orientation: float = 0
 
-    def rotate(self, angle, anchor=(0, 0)):
+    def rotate(self, orientation, anchor=(0, 0)):
         ax, ay = anchor
         px, py = self.x, self.y
 
-        self.x = ax + math.cos(math.radians(angle)) * (px - ax) + \
-            math.sin(math.radians(angle)) * (py - ay)
-        self.y = ay - math.sin(math.radians(angle)) * (px - ax) + \
-            math.cos(math.radians(angle)) * (py - ay)
+        self.x = ax + math.cos(math.radians(orientation)) * (px - ax) + \
+            math.sin(math.radians(orientation)) * (py - ay)
+        self.y = ay - math.sin(math.radians(orientation)) * (px - ax) + \
+            math.cos(math.radians(orientation)) * (py - ay)
 
-        self.angle = angle
+        self.orientation = orientation
 
     def move(self, x=0.0, y=0.0):
         self.x += x
@@ -102,7 +103,7 @@ def design_sw_and_dio():
         name='SW25',
         x=OFFSET[0] + U * 0 - U/2 - distance,
         y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + distance,
-        angle=15
+        orientation=15
     )
     design.add(SW25)
 
@@ -120,7 +121,7 @@ def design_sw_and_dio():
         name='SW27',
         x=SW26.x + U,
         y=SW26.y,
-        angle=-30
+        orientation=-30
     )
     SW27.move(distance, 5)
     design.add(SW27)
@@ -136,7 +137,7 @@ def design_sw_and_dio():
             x=switch.x,
             y=switch.y - U/2 + 1,
         )
-        diode.rotate(180 + switch.angle, anchor=(switch.x, switch.y))
+        diode.rotate(180 + switch.orientation, anchor=(switch.x, switch.y))
 
         design.add(diode)
 

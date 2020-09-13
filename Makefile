@@ -6,17 +6,21 @@ all: case
 
 # case: build/case/assembly.png build/case/pcb.dxf build/case/plate.dxf
 
-# watch-case-assembly:
-# 	watch -n1 make build/case/assembly.scad
+watch-case-assembly:
+	watch -n1 make assembly
 
 # build/case/assembly.png: build/case/assembly.scad
 # 	openscad --colorscheme DeepOcean -o $@ $<
 # build/case/pcb.dxf: build/case/pcb.scad
 # 	openscad -o  $@ $<
-
-# build/case/assembly.scad: build/design/design.json $(wildcard case/*.py)
-# 	mkdir -p build/case
-# 	case/case.py $< build/case
+.PHONY: assembly
+assembly: build/case/assembly.scad
+build/case/assembly.scad: build/pcb/footprint_dump.json build/design/mh_standoff.json $(wildcard case/*.py)
+	mkdir -p build/case
+	case/case.py\
+		--kicad-dump build/pcb/footprint_dump.json\
+		--mh-standoff build/design/mh_standoff.json\
+		-o build/case
 
 PCB=pcb/more-organic/more-organic.kicad_pcb
 

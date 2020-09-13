@@ -9,26 +9,10 @@ arduino_pro_micro_2d = color([.004, 58.0/255, 147.0/255, .5])(
         [-17.8, -8.9],
     ])
 )
-arduino_pro_micro_3d = \
-    color([.004, 58.0/255, 147.0/255, .5])(
-        linear_extrude(1.6)(arduino_pro_micro_2d)
-    ) +\
-    up(2)(
-        color([.6, .6, .6, .5])(
-            linear_extrude(2)(
-                polygon(points=[
-                    [-19.3, -3.8],
-                    [-14.2, -3.8],
-                    [-14.2, 3.8],
-                    [-19.3, 3.8],
-                ])
-            )
-        )
-    )
 
 # width of 10.7: flippable footprint
 # trrs = color([.3, .3, .3])(square([10.7, 14.1], center=True))
-trrs = color([.3, .3, .3])(
+trrs = color([.3, .3, .3])(mirror([0, 1, 0])(
     polygon(points=[
         [-5.35, 12.1],
         [5.35, 12.1],
@@ -39,7 +23,29 @@ trrs = color([.3, .3, .3])(
         [-5.1, 0],
         [-5.35, 0],
     ])
-)
+))
+
+resistor_hybrid = polygon(points=[
+    [-4.7, -1.1],
+    [4.7, -1.1],
+    [4.7, 1.1],
+    [-4.7, 1.1],
+])
+
+switch_6mm = polygon(points=[
+    [-1.5, 1.5],
+    [8, 1.5],
+    [8, -6],
+    [-1.5, -6],
+])
+
+jumper = polygon(points=[
+    [-1.65, -1.24],
+    [1.65, -1.24],
+    [1.65, 1.24],
+    [-1.65, 1.24],
+])
+
 
 m4_hole = circle(r=4.5/2)
 

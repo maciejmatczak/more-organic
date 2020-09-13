@@ -28,8 +28,12 @@ for m in board.GetModules():
     orientation = m.GetOrientation()/10
 
     print(name, footprint, x, y, orientation)
-    dump.append(
-        [name, footprint, x, y, orientation]
-    )
+    dump.append({
+        'name': name,
+        'footprint': footprint,
+        'x': x,
+        'y': y,
+        'orientation': orientation,
+    })
 
 dump_path.write_text(json.dumps(dump, indent=4))

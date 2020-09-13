@@ -7,10 +7,11 @@ from pathlib import Path
 from solid import *
 from solid.utils import *  # Not required, but the utils module is useful
 from solid import rotate as _rotate
+import sys
 
-from switch import switch_cutout, switch_bbox
-from misc import (arduino_pro_micro_2d, arduino_pro_micro_3d,
-                  trrs, m4_hole, m4_screw, m2_hole, m2_screw)
+from switch import switch_cutout, switch_bbox, switch_courtyard
+from misc import (arduino_pro_micro_2d, trrs, switch_6mm, jumper,
+                  resistor_hybrid,  m4_hole, m4_screw, m2_hole, m2_screw)
 
 
 OPENSCAD_HEADER = '$fa = 6;\n$fs = .1;'
@@ -19,7 +20,7 @@ UNIT = 19.05
 
 # Plate design settings
 PLATE_MELT_GROW = 16
-PLATE_MELT_D = 6
+PLATE_MELT_D = 3
 PLATE_MELT_SHRINK = PLATE_MELT_GROW - PLATE_MELT_D
 
 # PCB design settings
@@ -30,12 +31,6 @@ PCB_MELT_SHRINK = PCB_MELT_GROW - PCB_MELT_D
 PCB_PLATE_Z = 5
 PCB_SCREW_M4_CLEARENCE = 4
 PCB_SCREW_M2_CLEARENCE = 2
-
-
-class rotate(_rotate):
-    def __init__(self, a: float = None, v: Vec3 = None) -> None:
-        a = -a
-        super().__init__(a=a, v=v)
 
 
 def melt(obj, grow, shrink):
@@ -49,169 +44,207 @@ def make_switches(design):
     # keeps all switches cutouts
     switch_cutouts = []
 
-    # going through all the design data about switches
-    for name, switch in {k: el for k, el in design.items() if k.startswith('SW')}.items():
+    # keeps all switches courtyards
+    switch_courtyards = []
+
+    for element in design:
+        x = element['x']
+        y = element['y']
+        orientation = element['orientation']
+
         sw = copy(switch_cutout)
         sw_bbox = copy(switch_bbox)
+        sw_courtyard = copy(switch_courtyard)
 
         # if name == 'SW27':
         #     sw = debug(sw)
 
-        if switch['angle']:
-            sw = rotate(switch['angle'])(sw)
-            sw_bbox = rotate(switch['angle'])(sw_bbox)
+        if orientation:
+            sw = rotate(orientation)(sw)
+            sw_bbox = rotate(orientation)(sw_bbox)
+            sw_courtyard = rotate(orientation)(sw_courtyard)
 
-        sw = translate([switch['x'], switch['y']])(sw)
+        sw = translate([x, y])(sw)
+        sw_courtyard = translate([x, y])(sw_courtyard)
 
-        sw_bbox = translate([switch['x'], switch['y'], PCB_PLATE_Z+5])(sw_bbox)
+        sw_bbox = translate([x, y, PCB_PLATE_Z+5])(sw_bbox)
 
         switch_cutouts.append(sw)
         switch_bboxes.append(sw_bbox)
+        switch_courtyards.append(sw_courtyard)
 
-    return switch_cutouts, switch_bboxes
+    return switch_cutouts, switch_bboxes, switch_courtyards
 
 
-def make_screws(design, prefix, screw_model, hole_model):
-    holes = []
+def make_screws(design, screw_model, hole_model):
     screws = []
-    for name, design_data in {k: el for k, el in design.items() if k.startswith(prefix)}.items():
+    holes = []
+
+    for element in design:
+        x = element['x']
+        y = element['y']
+
         holes += translate(
-            [design_data['x'], design_data['y']]
+            [x, y]
         )(hole_model)
 
         screws += translate(
-            [design_data['x'], design_data['y']]
+            [x, y]
         )(screw_model)
 
     return screws, holes
 
 
-def case(design):
-    switch_cutouts, switch_bboxes = make_switches(design)
+def make_other_elements(design):
+    full_footprint = []
+    mapping = {
+        'Button_Switch_THT:SW_PUSH_6mm_H7.3mm': switch_6mm,
+        'Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm': jumper,
+        'keebio-footprints:ArduinoProMicro': arduino_pro_micro_2d,
+        'keebio-footprints:TRRS-PJ-320A-dual': trrs,
+        'keebio-footprints:Resistor-Hybrid': resistor_hybrid,
+    }
 
-    # plate -  built directly from switch cutouts - organically melted
+    for element in design:
+        footprint = element['footprint']
+        try:
+            model = mapping[footprint]
+        except KeyError:
+            print(f'Unknown footprint {footprint}')
+            sys.exit(1)
 
-    m4_screws, m4_holes = make_screws(design, 'SCREW_M4', m4_screw, m4_hole)
+        x = element['x']
+        y = element['y']
+        orientation = element['orientation']
+
+        if orientation:
+            model = rotate(orientation)(model)
+
+        model = translate([x, y])(model)
+
+        full_footprint.append(model)
+
+    return full_footprint, up(1.6 + .1)(linear_extrude(2)(full_footprint))
+
+
+def case(design_switches, design_diodes, design_other_elements, design_mh_m2,
+         design_mh_standoff):
+
+    m4_screws, m4_holes = make_screws(design_mh_standoff, m4_screw, m4_hole)
     m4_holes_clearence = offset(PCB_SCREW_M4_CLEARENCE)(m4_holes)
 
-    m2_screws, m2_holes = make_screws(design, 'SCREW_M2', m2_screw, m2_hole)
+    m4_screws = up(PCB_PLATE_Z + 1.6 + .001)(m4_screws)
+
+    m2_screws, m2_holes = make_screws(design_mh_m2, m2_screw, m2_hole)
     m2_holes_clearence = offset(PCB_SCREW_M2_CLEARENCE)(m2_holes)
 
     m2_screws = up(PCB_PLATE_Z + 1.6 + .001)(m2_screws)
-    m4_screws = up(PCB_PLATE_Z + 1.6 + .001)(m4_screws)
 
-    plate = melt(switch_cutouts,
+    switch_cutouts, switch_bboxes, switch_courtyards = make_switches(
+        design_switches)
+
+    other_elements_footprint, other_elements_representation =\
+        make_other_elements(design_other_elements)
+
+    other_elements_footprint_melted = melt(
+        other_elements_footprint, 10, 10
+    )
+    other_elements_footprint_cut =\
+        intersection()(
+            other_elements_footprint_melted,
+            translate([0, -PCB_MELT_D])(
+                other_elements_footprint_melted
+            )
+        )
+
+    plate = melt(switch_courtyards,
                  PLATE_MELT_GROW, PLATE_MELT_SHRINK)
 
     plate = melt(plate + m4_holes_clearence, 20, 20)
-    # plate -= m4_holes
-    # plate -= m2_holes
-    plate -= switch_cutouts
-    plate = linear_extrude(1.6)(plate)
 
-    # collisions - from switch bboxes, when it occures - it's painted red
+    plate -= switch_cutouts
+
     collisions = []
     for bbox_1, bbox_2 in combinations(switch_bboxes, r=2):
         collisions += bbox_1 * bbox_2
 
-    collisions = color(Red)(collisions)
-
-    # other elements
-    U1_arduino_pro_micro = copy(arduino_pro_micro_3d)
-    # if design['U1']['angle']:
-    U1_arduino_pro_micro = rotate(
-        design['U1']['angle'])(U1_arduino_pro_micro)
-    U1_arduino_pro_micro = translate(
-        [design['U1']['x'], design['U1']['y']]
-    )(
-        U1_arduino_pro_micro
-    )
-
-    U1_arduino_pro_micro_2d = projection(cut=True)(U1_arduino_pro_micro)
-
-    # cutting on front - elements have to be on the edge, so we can't melt there
-    U1_arduino_pro_micro_cut = intersection()(
-        U1_arduino_pro_micro_2d,
-        translate([0, PCB_MELT_D])(U1_arduino_pro_micro_2d)
-    )
-
-    U2_trrs = copy(trrs)
-    U2_trrs_cut = intersection()(
-        U2_trrs,
-        translate([0, PCB_MELT_D])(U2_trrs)
-    )
-    if design['U2']['angle']:
-        U2_trrs = rotate(design['U2']['angle'])(U2_trrs)
-        U2_trrs_cut = rotate(design['U2']['angle'])(U2_trrs_cut)
-
-    U2_trrs = translate([design['U2']['x'], design['U2']['y']])(
-        U2_trrs
-    )
-    U2_trrs_cut = translate([design['U2']['x'], design['U2']['y']])(
-        U2_trrs_cut
-    )
-
-    # adding some additional margin for rest of the smaller parts
-    reserved = translate(
-        [design['reserved']['x'], design['reserved']['y']]
-    )(
-        square(
-            [10, 20], center=True
-        )
-    )
-
     pcb = melt(
-        switch_cutouts + U1_arduino_pro_micro_cut + U2_trrs_cut +
-        reserved,
+        switch_cutouts + other_elements_footprint_cut,
         PCB_MELT_GROW, PCB_MELT_SHRINK
     )
     pcb = melt(pcb + m2_holes_clearence, 2, 2)
-    # pcb -= m2_holes
 
+    cover = melt(
+        other_elements_footprint_cut,
+        PCB_MELT_GROW, PCB_MELT_SHRINK
+    )
+    cover = melt(
+        cover + m2_holes_clearence,
+        2, 2
+    )
+    cover -= translate([-2, 0, 0])(plate)
+    cover = melt(cover, -2, -2)
+
+    cover = linear_extrude(1.6)(cover)
     pcb = linear_extrude(1.6)(pcb)
+    plate = linear_extrude(1.6)(plate)
 
-    cover = linear_extrude(1.6)(
-        melt(
-            intersection()(
-                U1_arduino_pro_micro_cut,
-                translate([-3, 0])(U1_arduino_pro_micro_2d)
-            )
-            + U2_trrs_cut,
-            PCB_MELT_GROW, PCB_MELT_SHRINK)
-    )
-
-    # shown elements + coloring
-    # U1_arduino_pro_micro = color([.004, 58.0/255, 147.0/255, .5])(
-    #     up(2)(linear_extrude(1.6)(U1_arduino_pro_micro)))
-    U2_trrs = color([.4, .4, .4, .5])(
-        up(2)(linear_extrude(1.6)(U2_trrs))
-    )
-
-    reserved = color([.4, .4, .4, .5])(
-        up(2)(linear_extrude(1.6)(reserved))
-    )
-
+    collisions = color(Red)(collisions)
     pcb = color([1, 1, .8, .5])(pcb)
-    plate = color([.8, .85, 1, .5])(plate)
     cover = color([.8, .85, 1, .5])(cover)
+    plate = color([.8, .85, 1, .5])(plate)
     m4_screws = color([.3, .3, .3, .4])(m4_screws)
     m2_screws = color([.3, .3, .3, .4])(m2_screws)
 
-    # last union
     assembly =\
         pcb +\
+        other_elements_representation + m4_screws + m2_screws +\
         up(PCB_PLATE_Z)(plate) +\
-        up(PCB_PLATE_Z)(U1_arduino_pro_micro) +\
-        U2_trrs + m4_screws + m2_screws + collisions + switch_bboxes +\
-        up(PCB_PLATE_Z*2)(cover) + reserved
+        up(PCB_PLATE_Z*2)(cover) +\
+        switch_bboxes + collisions
 
-    # mirror on y to meet the KiCAD
-    elements = [
-        mirror([0, 1, 0])(model) for model in
-        [assembly, pcb, plate]
-    ]
+    return assembly, '', ''
 
-    return elements
+
+def kicad2openscad(design):
+    translated_design = []
+
+    for element in design:
+        element['y'] *= -1
+        element['orientation'] = (element['orientation'] + 90) % 360 - 90
+
+        # element['orientation'] *= -1
+        translated_design.append(element)
+
+    return translated_design
+
+
+def split_kicad_dump(kicad_dump):
+    design_switches = []
+    design_diodes = []
+    design_other_elements = []
+    design_mh_m2 = []
+
+    mapping = {
+        'keyswitches:Kailh_socket_MX_optional_reversible_alt': design_switches,
+        'keebio-footprints:Diode-dual': design_diodes,
+        'MountingHole_2.2mm_M2_Pad_Via': design_mh_m2,
+        'Button_Switch_THT:SW_PUSH_6mm_H7.3mm': design_other_elements,
+        'Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm': design_other_elements,
+        'keebio-footprints:ArduinoProMicro': design_other_elements,
+        'keebio-footprints:TRRS-PJ-320A-dual': design_other_elements,
+        'keebio-footprints:Resistor-Hybrid': design_other_elements,
+    }
+    for element in kicad_dump:
+        footprint = element['footprint']
+        try:
+            list_ = mapping[footprint]
+            list_.append(element)
+        except KeyError:
+            print(f'Unknown element\'s footprint {element}')
+            sys.exit(1)
+
+    return design_switches, design_diodes, design_other_elements, design_mh_m2
 
 
 if __name__ == '__main__':
@@ -219,18 +252,35 @@ if __name__ == '__main__':
         description='Creates scad file and dxf for case'
     )
     parser.add_argument(
-        'design_file', type=lambda p: Path(p).resolve(),
-        help='Input path of the design file.'
+        '--kicad-dump', type=lambda p: Path(p).resolve(),
+        required=True,
+        help='Input path from kicad dump.'
     )
     parser.add_argument(
-        'output_path', type=lambda p: Path(p).resolve(),
+        '--mh-standoff', type=lambda p: Path(p).resolve(),
+        required=True,
+        help='Input path for standoffs'
+    )
+    parser.add_argument(
+        '-o', '--output-path', type=lambda p: Path(p).resolve(),
+        required=True,
         help='Output directory of the case files.'
     )
     args = parser.parse_args()
 
-    design = json.loads(args.design_file.read_text())
+    kicad_dump = json.loads(args.kicad_dump.read_text())
+    kicad_dump = kicad2openscad(kicad_dump)
+    design_switches, design_diodes, design_other_elements, design_mh_m2 =\
+        split_kicad_dump(kicad_dump)
 
-    assembly, pcb, plate = case(design)
+    design_mh_standoff = json.loads(args.mh_standoff.read_text())
+    design_mh_standoff = kicad2openscad(design_mh_standoff)
+
+    assembly, pcb, plate = case(
+        design_switches, design_diodes,
+        design_other_elements,
+        design_mh_m2, design_mh_standoff
+    )
 
     # 3 files - one main/full/assembly, for png, rest is used directly to use
     # export separate pieces
@@ -240,18 +290,18 @@ if __name__ == '__main__':
         file_header=OPENSCAD_HEADER,
         include_orig_code=True)
 
-    pcb_projection = projection(cut=True)(
-        pcb
-    )
-    scad_render_to_file(
-        pcb_projection, args.output_path / 'pcb.scad',
-        file_header=OPENSCAD_HEADER,
-        include_orig_code=True)
+    # pcb_projection = projection(cut=True)(
+    #     pcb
+    # )
+    # scad_render_to_file(
+    #     pcb_projection, args.output_path / 'pcb.scad',
+    #     file_header=OPENSCAD_HEADER,
+    #     include_orig_code=True)
 
-    plate_projection = projection(cut=True)(
-        plate
-    )
-    scad_render_to_file(
-        plate_projection, args.output_path / 'plate.scad',
-        file_header=OPENSCAD_HEADER,
-        include_orig_code=True)
+    # plate_projection = projection(cut=True)(
+    #     plate
+    # )
+    # scad_render_to_file(
+    #     plate_projection, args.output_path / 'plate.scad',
+    #     file_header=OPENSCAD_HEADER,
+    #     include_orig_code=True)

@@ -34,8 +34,8 @@ switch_cutout = polygon(
         [0.8, 1],
     ]
 )
-
 switch_cutout = translate([-15.6/2, -14/2])(switch_cutout)
+
 switch_bbox = color([1, 1, 1, .2])(
     # adding dummy distance to avoid showing issues when 2 surfaces touches
     # each other
@@ -44,6 +44,9 @@ switch_bbox = color([1, 1, 1, .2])(
     )
 )
 
+switch_courtyard = square(
+    [UNIT, UNIT], center=True
+)
 
 if __name__ == '__main__':
     switch = switch_cutout + switch_bbox
