@@ -81,13 +81,9 @@ class Design:
 def design_sw_and_dio():
     # 30 switches, 1-24 are column staggered
     # for every switch 1 diode
-    # U1 - arduino pro micro
-    # U2 - TRRS
-    # SW_RESET - reset switch
 
     design = Design()
 
-    # x, y, angle
     for row in range(1, 5):
         for col in range(1, 7):
             i = 6*(row - 1) + col
