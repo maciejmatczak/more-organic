@@ -203,7 +203,7 @@ def case(design_switches, design_diodes, design_other_elements, design_mh_m2,
         up(PCB_PLATE_Z*2)(cover) +\
         switch_bboxes + collisions
 
-    return assembly, '', ''
+    return assembly, pcb, plate, cover
 
 
 def kicad2openscad(design):
@@ -276,7 +276,7 @@ if __name__ == '__main__':
     design_mh_standoff = json.loads(args.mh_standoff.read_text())
     design_mh_standoff = kicad2openscad(design_mh_standoff)
 
-    assembly, pcb, plate = case(
+    assembly, pcb, plate, cover = case(
         design_switches, design_diodes,
         design_other_elements,
         design_mh_m2, design_mh_standoff
@@ -290,18 +290,26 @@ if __name__ == '__main__':
         file_header=OPENSCAD_HEADER,
         include_orig_code=True)
 
-    # pcb_projection = projection(cut=True)(
-    #     pcb
-    # )
-    # scad_render_to_file(
-    #     pcb_projection, args.output_path / 'pcb.scad',
-    #     file_header=OPENSCAD_HEADER,
-    #     include_orig_code=True)
+    pcb_projection = projection(cut=True)(
+        pcb
+    )
+    scad_render_to_file(
+        pcb_projection, args.output_path / 'pcb.scad',
+        file_header=OPENSCAD_HEADER,
+        include_orig_code=True)
 
-    # plate_projection = projection(cut=True)(
-    #     plate
-    # )
-    # scad_render_to_file(
-    #     plate_projection, args.output_path / 'plate.scad',
-    #     file_header=OPENSCAD_HEADER,
-    #     include_orig_code=True)
+    plate_projection = projection(cut=True)(
+        plate
+    )
+    scad_render_to_file(
+        plate_projection, args.output_path / 'plate.scad',
+        file_header=OPENSCAD_HEADER,
+        include_orig_code=True)
+
+    cover_projection = projection(cut=True)(
+        cover
+    )
+    scad_render_to_file(
+        cover_projection, args.output_path / 'cover.scad',
+        file_header=OPENSCAD_HEADER,
+        include_orig_code=True)
