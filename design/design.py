@@ -33,7 +33,7 @@ MH_PCB_TO_PLATE = [
     (U*3.5 - 3, COLUMN_OFFSET[3] + U*3.5 + 3),
 ]
 
-MH_PCB_TO_SMALL_PLATE = [
+MH_PCB_TO_COVER = [
     (-35, 18),
     (-25, 36),
 ]
@@ -172,9 +172,9 @@ def design_mh_pcb_to_plate():
     return design
 
 
-def design_mh_pcb_to_small_plate():
+def design_mh_pcb_to_cover():
     design = Design()
-    for x, y in MH_PCB_TO_SMALL_PLATE:
+    for x, y in MH_PCB_TO_COVER:
         screw = Element(
             footprint=MH_M2_FOOTPRINT,
             x=x,
@@ -205,5 +205,5 @@ if __name__ == '__main__':
     d = design_mh_pcb_to_plate()
     d.save(args.output_path / 'mh_pcb_to_plate.json')
 
-    d = design_mh_pcb_to_small_plate()
-    d.save(args.output_path / 'mh_pcb_to_small_plate.json')
+    d = design_mh_pcb_to_cover()
+    d.save(args.output_path / 'mh_pcb_to_cover.json')

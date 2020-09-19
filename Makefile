@@ -1,4 +1,4 @@
-.PHONY: dev all design pcb-place pcb-dump
+.PHONY: dev all pcb-place pcb-dump
 
 
 all: case
@@ -59,13 +59,15 @@ pcb-place:
 		build/design/mh_pcb_to_plate.json
 	scripts/mh_add.py\
 		$(PCB)\
-		build/design/mh_pcb_to_small_plate.json
+		build/design/mh_pcb_to_cover.json
 
+
+.PHONY: design
 
 design_files = $(addprefix build/design/,\
 	sw_and_dio.json\
 	mh_pcb_to_plate.json \
-	mh_pcb_to_small_plate.json\
+	mh_pcb_to_cover.json\
 	mh_standoff.json\
 )
 
