@@ -1,13 +1,16 @@
-.PHONY: dev all pcb-place pcb-dump
-
+.PHONY: all
 
 all: case
 
 
-.PHONY: case-assembly case-assembly-watch
-case-assembly: build/case/assembly.scad
+PCB=pcb/more-organic/more-organic.kicad_pcb
+
+
+.PHONY: case case-assembly case-assembly-watch
+
 case-assembly-watch:
 	watch -n1 make case-assembly
+case-assembly: build/case/assembly.scad
 
 case: $(addprefix build/case/,\
 	assembly.png\
@@ -28,25 +31,25 @@ scad_files=$(addprefix build/case/,\
 	cover.scad\
 	plate.scad\
 )
-$(scad_files) &: build/pcb/footprint_dump.json build/design/mh_standoff.json $(wildcard case/*.py)
+$(scad_files): build/pcb/footprint_dump.json build/design/mh_standoff.json $(wildcard case/*.py)
 	mkdir -p build/case
 	case/case.py\
 		--kicad-dump build/pcb/footprint_dump.json\
 		--mh-standoff build/design/mh_standoff.json\
 		-o build/case
 
-PCB=pcb/more-organic/more-organic.kicad_pcb
 
+.PHONY: pcb-dump pcb-place
 
 pcb-dump: build/pcb/footprint_dump.json
-
 
 build/pcb/footprint_dump.json: $(PCB)
 	mkdir -p build/pcb
 	scripts/dump_footprints.py $< $@
 
-
 pcb-place:
+	mkdir -p build/pcb
+
 	scripts/place_footprints.py\
 		$(PCB)\
 		build/design/sw_and_dio.json
@@ -57,9 +60,6 @@ pcb-place:
 	scripts/mh_add.py\
 		$(PCB)\
 		build/design/mh_pcb_to_plate.json
-	scripts/mh_add.py\
-		$(PCB)\
-		build/design/mh_pcb_to_cover.json
 
 
 .PHONY: design
@@ -67,7 +67,6 @@ pcb-place:
 design_files = $(addprefix build/design/,\
 	sw_and_dio.json\
 	mh_pcb_to_plate.json \
-	mh_pcb_to_cover.json\
 	mh_standoff.json\
 )
 
@@ -80,3 +79,8 @@ $(design_files): design/design.py
 
 dev:
 	git submodule update --init --recursive
+
+
+.PHONY: clean
+clean:
+	rm -rf build
