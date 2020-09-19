@@ -3,10 +3,28 @@
 all: case
 
 
-PCB=pcb/more-organic/more-organic.kicad_pcb
+PCB=pcb/pcb.kicad_pcb
 PCB_PLATE=plate/plate.kicad_pcb
 PCB_COVER=cover/cover.kicad_pcb
 
+
+.PHONY: plot
+
+ZIPS=$(addprefix build/fab/make-organic-,\
+	$(notdir \
+		$(patsubst %.kicad_pcb,%.zip,$(PCB) $(PCB_PLATE) $(PCB_COVER))\
+	)\
+)
+
+plot: $(ZIPS)
+
+.SECONDEXPANSION:
+build/fab/make-organic-%.zip: $$*/$$*.kicad_pcb
+	mkdir -p $(dir $@)
+	
+	scripts/plot_fab.py $< $(dir $@)$*
+	
+	7z a $@ $(dir $@)$*
 
 
 .PHONY: cover-place
