@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import argparse
 import os
 from pathlib import Path
 import sys
@@ -7,56 +8,62 @@ import json
 
 import pcbnew
 
-
-pcb_path = os.path.abspath(sys.argv[1])
-placement_config_path = os.path.abspath(sys.argv[2])
-
-if not Path(pcb_path).exists():
-    print(f'PCB {pcb_path} not found, exiting')
-    sys.exit(1)
-
-if not Path(placement_config_path).exists():
-    print(
-        f'Key placement config {placement_config_path} not found, exiting')
-    sys.exit(1)
-else:
-    with Path(placement_config_path).open('r') as p:
-        placement_config = json.load(p)
-
-# dictifying a placement_config, which currently is a list
-# name attribute could be empty, but that should be weird if we move around
-# existing elements
-placement_config_dict = {}
-for element in placement_config:
-    name = element['name']
-    if name:
-        placement_config_dict[name] = element
-    else:
-        print(f'Ignoring unnamed: {element}')
+sys.path.append(Path(__file__).parent)
+from common import path_type  # noqa
 
 
-board = pcbnew.LoadBoard(pcb_path)
-io = pcbnew.PCB_IO()
+def place_footprints(pcb_path: str, placement_config: dict):
+    # dictifying a placement_config, which currently is a list
+    # name attribute could be empty, but that should be weird if we move around
+    # existing elements
+    placement_config_dict = {}
+    for element in placement_config:
+        name = element['name']
+        if name:
+            placement_config_dict[name] = element
+        else:
+            print(f'Ignoring unnamed: {element}')
 
-for m in board.GetModules():
-    name = m.GetReference()
+    board = pcbnew.LoadBoard(pcb_path)
 
-    try:
-        placement = placement_config_dict.pop(name)
-    except KeyError:
-        print(f'Footprint {name} not found in config!')
-        continue
+    for m in board.GetModules():
+        name = m.GetReference()
 
-    x = placement.get('x')
-    y = placement.get('y')
-    angle = placement.get('angle')
+        try:
+            placement = placement_config_dict.pop(name)
+        except KeyError:
+            print(f'Footprint {name} not found in config!')
+            continue
 
-    m.SetPosition(pcbnew.wxPointMM(
-        x,
-        y,
-    ))
+        x = placement['x']
+        y = placement['y']
+        angle = placement['orientation']
 
-    m.SetOrientation(angle*10)
+        m.SetPosition(pcbnew.wxPointMM(
+            x,
+            y,
+        ))
+
+        m.SetOrientation(angle*10)
+
+    board.Save(board.GetFileName())
 
 
-board.Save(board.GetFileName())
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Places a footrpints accordingly to a config file'
+    )
+    parser.add_argument(
+        'pcb', type=path_type,
+        help='PCB file path'
+    )
+    parser.add_argument(
+        'placement_config', type=path_type,
+        help='Placement config path'
+    )
+    args = parser.parse_args()
+
+    place_footprints(
+        str(args.pcb),
+        json.loads(args.placement_config.read_text())
+    )

@@ -1,52 +1,59 @@
 #!/usr/bin/env python
 
-import os
+import argparse
 from pathlib import Path
-import sys
-import json
+import os
 import dotenv
+import sys
 
 import pcbnew
 
-
-dotenv.load_dotenv()
-
-
-pcb_path = os.path.abspath(sys.argv[1])
-placement_config_path = os.path.abspath(sys.argv[2])
-
-if not Path(pcb_path).exists():
-    print(f'PCB {pcb_path} not found, exiting')
-    sys.exit(1)
-
-if not Path(placement_config_path).exists():
-    print(
-        f'Key placement config {placement_config_path} not found, exiting')
-    sys.exit(1)
-else:
-    with Path(placement_config_path).open('r') as p:
-        placement_config = json.load(p)
+sys.path.append(Path(__file__).parent)
+from common import path_type  # noqa
 
 
-board = pcbnew.LoadBoard(pcb_path)
-io = pcbnew.PCB_IO()
-mh_pretty = os.environ['KICAD_MOUNTING_HOLE_PATH']
+def mh_add(pcb_path: str, placement_config: dict):
+    board = pcbnew.LoadBoard(pcb_path)
+    io = pcbnew.PCB_IO()
+    mh_pretty = os.environ['KICAD_MOUNTING_HOLE_PATH']
 
-for placement in placement_config:
-    footprint = placement.get('footprint')
+    for placement in placement_config:
+        footprint = placement.get('footprint')
 
-    x = placement.get('x')
-    y = placement.get('y')
+        x = placement.get('x')
+        y = placement.get('y')
 
-    mod = io.FootprintLoad(mh_pretty, footprint)
+        mod = io.FootprintLoad(mh_pretty, footprint)
 
-    mod.SetPosition(pcbnew.wxPointMM(
-        x,
-        y,
-    ))
-    mod.Reference().SetVisible(False)
+        mod.SetPosition(pcbnew.wxPointMM(
+            x,
+            y,
+        ))
+        mod.Reference().SetVisible(False)
 
-    print(f'=> Adding mh @ {x}; {y} mm')
-    board.Add(mod)
+        print(f'=> Adding mh @ {x}; {y} mm')
+        board.Add(mod)
 
-board.Save(board.GetFileName())
+    board.Save(board.GetFileName())
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Places mounting holes on pcb, based on placement config. '
+        'Expects a KICAD_MOUNTING_HOLE_PATH environment variable to be set '
+        '(.env).'
+    )
+    parser.add_argument(
+        'pcb', type=path_type,
+        help='PCB file path'
+    )
+    parser.add_argument(
+        'placement_config', type=path_type,
+        help='Placement config path'
+    )
+    args = parser.parse_args()
+
+    mh_add(
+        str(args.pcb),
+        args.placement_config
+    )
