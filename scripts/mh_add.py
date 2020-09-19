@@ -33,7 +33,9 @@ def mh_add(pcb_path: str, placement_config: dict):
             x,
             y,
         ))
+        mod.Reference().SetText('generated')
         mod.Reference().SetVisible(False)
+        mod.Value().SetVisible(False)
 
         print(f'=> Adding mh @ {x}; {y} mm')
         board.Add(mod)
