@@ -46,6 +46,8 @@ def place_footprints(pcb_path: str, placement_config: dict):
 
         m.SetOrientation(angle*10)
 
+        m.SetLocked(True)
+
     board.Save(board.GetFileName())
 
 
