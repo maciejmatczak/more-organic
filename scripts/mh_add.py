@@ -22,12 +22,15 @@ def mh_add(pcb_path: str, placement_config: dict):
     mh_pretty = os.environ['KICAD_MOUNTING_HOLE_PATH']
 
     for placement in placement_config:
-        footprint = placement.get('footprint')
+        footprint = placement['footprint']
 
         x = placement.get('x')
         y = placement.get('y')
 
         mod = io.FootprintLoad(mh_pretty, footprint)
+        if not mod:
+            print(f'{footprint} not found in {mh_pretty}')
+            sys.exit(1)
 
         mod.SetPosition(pcbnew.wxPointMM(
             x,
@@ -41,6 +44,20 @@ def mh_add(pcb_path: str, placement_config: dict):
         board.Add(mod)
 
     board.Save(board.GetFileName())
+
+
+def filter_config(placement_config, footprint=None, x_lt=None):
+    if footprint:
+        placement_config = [
+            el for el in placement_config if el['footprint'] == footprint
+        ]
+
+    if x_lt is not None:
+        placement_config = [
+            el for el in placement_config if el['x'] < x_lt
+        ]
+
+    return placement_config
 
 
 if __name__ == '__main__':
@@ -57,9 +74,25 @@ if __name__ == '__main__':
         'placement_config', type=path_type,
         help='Placement config path'
     )
+    parser.add_argument(
+        '--filter-footprint', type=str, default=None,
+        help='Config filter for footprint attribute'
+    )
+    parser.add_argument(
+        '--x-lt', type=float, default=None,
+        help='x lower than'
+    )
+
     args = parser.parse_args()
+
+    placement_config = json.loads(args.placement_config.read_text())
+    placement_config = filter_config(
+        placement_config,
+        footprint=args.filter_footprint,
+        x_lt=args.x_lt
+    )
 
     mh_add(
         str(args.pcb),
-        json.loads(args.placement_config.read_text())
+        placement_config
     )
