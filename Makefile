@@ -4,6 +4,33 @@ all: case
 
 
 PCB=pcb/more-organic/more-organic.kicad_pcb
+PCB_PLATE=plate/plate.kicad_pcb
+PCB_COVER=cover/cover.kicad_pcb
+
+
+
+.PHONY: cover-place
+
+cover-place: 
+	scripts/mh_delete.py\
+		$(PCB_COVER)
+
+	scripts/mh_add.py\
+		$(PCB_COVER)\
+		build/pcb/footprint_dump.json\
+		--filter-footprint MountingHole_2.2mm_M2_Pad_Via\
+		--x-lt 0
+
+
+.PHONY: plate-place
+
+plate-place:
+	scripts/mh_delete.py\
+		$(PCB_PLATE)
+
+	scripts/mh_add.py\
+		$(PCB_PLATE)	\
+		build/design/mh_standoff.json
 
 
 .PHONY: case case-assembly case-assembly-watch
@@ -48,8 +75,6 @@ build/pcb/footprint_dump.json: $(PCB)
 	scripts/dump_footprints.py $< $@
 
 pcb-place:
-	mkdir -p build/pcb
-
 	scripts/place_footprints.py\
 		$(PCB)\
 		build/design/sw_and_dio.json
