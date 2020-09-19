@@ -204,6 +204,3 @@ if __name__ == '__main__':
 
     d = design_mh_pcb_to_plate()
     d.save(args.output_path / 'mh_pcb_to_plate.json')
-
-    d = design_mh_pcb_to_cover()
-    d.save(args.output_path / 'mh_pcb_to_cover.json')
