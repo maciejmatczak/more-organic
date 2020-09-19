@@ -44,12 +44,12 @@ if __name__ == '__main__':
         help='PCB file path'
     )
     parser.add_argument(
-        'placement_config', type=path_type,
-        help='Placement config path'
+        'dump', type=lambda p: path_type(p, exists=False),
+        help='Placement config dump path'
     )
     args = parser.parse_args()
 
     dump_footprints(
         str(args.pcb),
-        args.placement_config
+        args.dump
     )
