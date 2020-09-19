@@ -1,8 +1,3 @@
-.PHONY: all
-
-all: case
-
-
 PCB=pcb/pcb.kicad_pcb
 PCB_PLATE=plate/plate.kicad_pcb
 PCB_COVER=cover/cover.kicad_pcb
