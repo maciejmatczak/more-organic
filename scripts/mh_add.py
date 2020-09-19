@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import argparse
 from pathlib import Path
 import os
@@ -10,6 +11,9 @@ import pcbnew
 
 sys.path.append(Path(__file__).parent)
 from common import path_type  # noqa
+
+
+dotenv.load_dotenv()
 
 
 def mh_add(pcb_path: str, placement_config: dict):
@@ -55,5 +59,5 @@ if __name__ == '__main__':
 
     mh_add(
         str(args.pcb),
-        args.placement_config
+        json.loads(args.placement_config.read_text())
     )
