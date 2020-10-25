@@ -111,8 +111,8 @@ design_files = $(addprefix build/design/,\
 design: $(design_files)
 
 $(design_files): design/design.py
-	mkdir -p build/design
-	$< build/design
+	mkdir -p data/design
+	$< data/design
 
 
 dev:

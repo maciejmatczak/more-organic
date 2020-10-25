@@ -1,0 +1,380 @@
+[
+    {
+        "name": "SW1",
+        "footprint": "",
+        "x": 0.0,
+        "y": 5.0,
+        "orientation": 0
+    },
+    {
+        "name": "SW2",
+        "footprint": "",
+        "x": 19.05,
+        "y": 0.0,
+        "orientation": 0
+    },
+    {
+        "name": "SW3",
+        "footprint": "",
+        "x": 38.1,
+        "y": -12.0,
+        "orientation": 0
+    },
+    {
+        "name": "SW4",
+        "footprint": "",
+        "x": 57.150000000000006,
+        "y": -8.0,
+        "orientation": 0
+    },
+    {
+        "name": "SW5",
+        "footprint": "",
+        "x": 76.2,
+        "y": 18.0,
+        "orientation": 0
+    },
+    {
+        "name": "SW6",
+        "footprint": "",
+        "x": 95.25,
+        "y": 23.0,
+        "orientation": 0
+    },
+    {
+        "name": "SW7",
+        "footprint": "",
+        "x": 0.0,
+        "y": 24.05,
+        "orientation": 0
+    },
+    {
+        "name": "SW8",
+        "footprint": "",
+        "x": 19.05,
+        "y": 19.05,
+        "orientation": 0
+    },
+    {
+        "name": "SW9",
+        "footprint": "",
+        "x": 38.1,
+        "y": 7.050000000000001,
+        "orientation": 0
+    },
+    {
+        "name": "SW10",
+        "footprint": "",
+        "x": 57.150000000000006,
+        "y": 11.05,
+        "orientation": 0
+    },
+    {
+        "name": "SW11",
+        "footprint": "",
+        "x": 76.2,
+        "y": 37.05,
+        "orientation": 0
+    },
+    {
+        "name": "SW12",
+        "footprint": "",
+        "x": 95.25,
+        "y": 42.05,
+        "orientation": 0
+    },
+    {
+        "name": "SW13",
+        "footprint": "",
+        "x": 0.0,
+        "y": 43.1,
+        "orientation": 0
+    },
+    {
+        "name": "SW14",
+        "footprint": "",
+        "x": 19.05,
+        "y": 38.1,
+        "orientation": 0
+    },
+    {
+        "name": "SW15",
+        "footprint": "",
+        "x": 38.1,
+        "y": 26.1,
+        "orientation": 0
+    },
+    {
+        "name": "SW16",
+        "footprint": "",
+        "x": 57.150000000000006,
+        "y": 30.1,
+        "orientation": 0
+    },
+    {
+        "name": "SW17",
+        "footprint": "",
+        "x": 76.2,
+        "y": 56.1,
+        "orientation": 0
+    },
+    {
+        "name": "SW18",
+        "footprint": "",
+        "x": 95.25,
+        "y": 61.1,
+        "orientation": 0
+    },
+    {
+        "name": "SW19",
+        "footprint": "",
+        "x": 0.0,
+        "y": 62.150000000000006,
+        "orientation": 0
+    },
+    {
+        "name": "SW20",
+        "footprint": "",
+        "x": 19.05,
+        "y": 57.150000000000006,
+        "orientation": 0
+    },
+    {
+        "name": "SW21",
+        "footprint": "",
+        "x": 38.1,
+        "y": 45.150000000000006,
+        "orientation": 0
+    },
+    {
+        "name": "SW22",
+        "footprint": "",
+        "x": 57.150000000000006,
+        "y": 49.150000000000006,
+        "orientation": 0
+    },
+    {
+        "name": "SW23",
+        "footprint": "",
+        "x": 76.2,
+        "y": 75.15,
+        "orientation": 0
+    },
+    {
+        "name": "SW24",
+        "footprint": "",
+        "x": 95.25,
+        "y": 80.15,
+        "orientation": 0
+    },
+    {
+        "name": "SW25",
+        "footprint": "",
+        "x": -11.725000000000001,
+        "y": 83.4,
+        "orientation": 15
+    },
+    {
+        "name": "SW26",
+        "footprint": "",
+        "x": 9.525,
+        "y": 81.2,
+        "orientation": 0
+    },
+    {
+        "name": "SW27",
+        "footprint": "",
+        "x": 32.075,
+        "y": 86.2,
+        "orientation": -30
+    },
+    {
+        "name": "D1",
+        "footprint": "",
+        "x": -1.0440113962731187e-15,
+        "y": 13.525,
+        "orientation": 180
+    },
+    {
+        "name": "D2",
+        "footprint": "",
+        "x": 19.05,
+        "y": 8.525,
+        "orientation": 180
+    },
+    {
+        "name": "D3",
+        "footprint": "",
+        "x": 38.1,
+        "y": -3.4750000000000014,
+        "orientation": 180
+    },
+    {
+        "name": "D4",
+        "footprint": "",
+        "x": 57.150000000000006,
+        "y": 0.5249999999999986,
+        "orientation": 180
+    },
+    {
+        "name": "D5",
+        "footprint": "",
+        "x": 76.2,
+        "y": 26.525,
+        "orientation": 180
+    },
+    {
+        "name": "D6",
+        "footprint": "",
+        "x": 95.25,
+        "y": 31.525,
+        "orientation": 180
+    },
+    {
+        "name": "D7",
+        "footprint": "",
+        "x": -1.0440113962731187e-15,
+        "y": 32.575,
+        "orientation": 180
+    },
+    {
+        "name": "D8",
+        "footprint": "",
+        "x": 19.05,
+        "y": 27.575000000000003,
+        "orientation": 180
+    },
+    {
+        "name": "D9",
+        "footprint": "",
+        "x": 38.1,
+        "y": 15.575000000000001,
+        "orientation": 180
+    },
+    {
+        "name": "D10",
+        "footprint": "",
+        "x": 57.150000000000006,
+        "y": 19.575000000000003,
+        "orientation": 180
+    },
+    {
+        "name": "D11",
+        "footprint": "",
+        "x": 76.2,
+        "y": 45.574999999999996,
+        "orientation": 180
+    },
+    {
+        "name": "D12",
+        "footprint": "",
+        "x": 95.25,
+        "y": 50.574999999999996,
+        "orientation": 180
+    },
+    {
+        "name": "D13",
+        "footprint": "",
+        "x": -1.0440113962731185e-15,
+        "y": 51.625,
+        "orientation": 180
+    },
+    {
+        "name": "D14",
+        "footprint": "",
+        "x": 19.05,
+        "y": 46.625,
+        "orientation": 180
+    },
+    {
+        "name": "D15",
+        "footprint": "",
+        "x": 38.1,
+        "y": 34.625,
+        "orientation": 180
+    },
+    {
+        "name": "D16",
+        "footprint": "",
+        "x": 57.150000000000006,
+        "y": 38.625,
+        "orientation": 180
+    },
+    {
+        "name": "D17",
+        "footprint": "",
+        "x": 76.2,
+        "y": 64.625,
+        "orientation": 180
+    },
+    {
+        "name": "D18",
+        "footprint": "",
+        "x": 95.25,
+        "y": 69.625,
+        "orientation": 180
+    },
+    {
+        "name": "D19",
+        "footprint": "",
+        "x": -1.0440113962731185e-15,
+        "y": 70.67500000000001,
+        "orientation": 180
+    },
+    {
+        "name": "D20",
+        "footprint": "",
+        "x": 19.05,
+        "y": 65.67500000000001,
+        "orientation": 180
+    },
+    {
+        "name": "D21",
+        "footprint": "",
+        "x": 38.1,
+        "y": 53.675000000000004,
+        "orientation": 180
+    },
+    {
+        "name": "D22",
+        "footprint": "",
+        "x": 57.150000000000006,
+        "y": 57.675000000000004,
+        "orientation": 180
+    },
+    {
+        "name": "D23",
+        "footprint": "",
+        "x": 76.2,
+        "y": 83.67500000000001,
+        "orientation": 180
+    },
+    {
+        "name": "D24",
+        "footprint": "",
+        "x": 95.25,
+        "y": 88.67500000000001,
+        "orientation": 180
+    },
+    {
+        "name": "D25",
+        "footprint": "",
+        "x": -9.51856764050101,
+        "y": 91.63451766911432,
+        "orientation": 195
+    },
+    {
+        "name": "D26",
+        "footprint": "",
+        "x": 9.524999999999999,
+        "y": 89.72500000000001,
+        "orientation": 180
+    },
+    {
+        "name": "D27",
+        "footprint": "",
+        "x": 27.8125,
+        "y": 93.58286656726234,
+        "orientation": 150
+    }
+]
