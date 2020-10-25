@@ -43,7 +43,7 @@ plate-place:
 
 	scripts/mh_add.py\
 		$(PCB_PLATE)	\
-		build/design/mh_standoff.json
+		data/design/mh_standoff.json
 
 
 .PHONY: case case-assembly case-assembly-watch
@@ -71,11 +71,11 @@ scad_files=$(addprefix build/case/,\
 	cover.scad\
 	plate.scad\
 )
-$(scad_files): build/pcb/footprint_dump.json build/design/mh_standoff.json $(wildcard case/*.py)
+$(scad_files): build/pcb/footprint_dump.json data/design/mh_standoff.json $(wildcard case/*.py)
 	mkdir -p build/case
 	case/case.py\
 		--kicad-dump build/pcb/footprint_dump.json\
-		--mh-standoff build/design/mh_standoff.json\
+		--mh-standoff data/design/mh_standoff.json\
 		-o build/case
 
 
@@ -90,19 +90,19 @@ build/pcb/footprint_dump.json: $(PCB)
 pcb-place:
 	scripts/place_footprints.py\
 		$(PCB)\
-		build/design/sw_and_dio.json
+		data/design/sw_and_dio.json
 	
 	scripts/mh_delete.py\
 		$(PCB)
 
 	scripts/mh_add.py\
 		$(PCB)\
-		build/design/mh_pcb_to_plate.json
+		data/design/mh_pcb_to_plate.json
 
 
 .PHONY: design
 
-design_files = $(addprefix build/design/,\
+design_files = $(addprefix data/design/,\
 	sw_and_dio.json\
 	mh_pcb_to_plate.json \
 	mh_standoff.json\
