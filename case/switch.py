@@ -51,4 +51,4 @@ switch_courtyard = square(
 if __name__ == '__main__':
     switch = switch_cutout + switch_bbox
 
-    scad_render_to_file(switch, include_orig_code=True)
+    scad_render_to_file(switch, include_orig_code=False)

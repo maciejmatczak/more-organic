@@ -288,7 +288,7 @@ if __name__ == '__main__':
     scad_render_to_file(
         assembly, args.output_path / 'assembly.scad',
         file_header=OPENSCAD_HEADER,
-        include_orig_code=True)
+        include_orig_code=False)
 
     pcb_projection = projection(cut=True)(
         pcb
@@ -296,7 +296,7 @@ if __name__ == '__main__':
     scad_render_to_file(
         pcb_projection, args.output_path / 'pcb.scad',
         file_header=OPENSCAD_HEADER,
-        include_orig_code=True)
+        include_orig_code=False)
 
     plate_projection = projection(cut=True)(
         plate
@@ -304,7 +304,7 @@ if __name__ == '__main__':
     scad_render_to_file(
         plate_projection, args.output_path / 'plate.scad',
         file_header=OPENSCAD_HEADER,
-        include_orig_code=True)
+        include_orig_code=False)
 
     cover_projection = projection(cut=True)(
         cover
@@ -312,4 +312,4 @@ if __name__ == '__main__':
     scad_render_to_file(
         cover_projection, args.output_path / 'cover.scad',
         file_header=OPENSCAD_HEADER,
-        include_orig_code=True)
+        include_orig_code=False)

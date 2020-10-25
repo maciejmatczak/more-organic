@@ -112,6 +112,7 @@ def design_sw_and_dio():
         name='SW26',
         x=OFFSET[0] + U * 1 - U/2,
         y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4,
+        orientation=33
     )
     design.add(SW26)
 
