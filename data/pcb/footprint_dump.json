@@ -1,0 +1,478 @@
+[
+    {
+        "name": "generated",
+        "footprint": "MountingHole_2.2mm_M2_Pad_Via",
+        "x": 63.675,
+        "y": 61.675,
+        "orientation": 0.0
+    },
+    {
+        "name": "generated",
+        "footprint": "MountingHole_2.2mm_M2_Pad_Via",
+        "x": 12.025,
+        "y": 69.175,
+        "orientation": 0.0
+    },
+    {
+        "name": "generated",
+        "footprint": "MountingHole_2.2mm_M2_Pad_Via",
+        "x": 69.675,
+        "y": 5.475,
+        "orientation": 0.0
+    },
+    {
+        "name": "generated",
+        "footprint": "MountingHole_2.2mm_M2_Pad_Via",
+        "x": 25.575,
+        "y": -12.525,
+        "orientation": 0.0
+    },
+    {
+        "name": "",
+        "footprint": "MountingHole_2.2mm_M2_Pad_Via",
+        "x": -31.0,
+        "y": 39.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "",
+        "footprint": "MountingHole_2.2mm_M2_Pad_Via",
+        "x": -18.0,
+        "y": 48.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "",
+        "footprint": "MountingHole_2.2mm_M2_Pad_Via",
+        "x": -44.0,
+        "y": 30.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW_RESET1",
+        "footprint": "Button_Switch_THT:SW_PUSH_6mm_H7.3mm",
+        "x": -16.2,
+        "y": 42.8,
+        "orientation": 180.0
+    },
+    {
+        "name": "SW27",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 32.075,
+        "y": 86.2,
+        "orientation": 330.0
+    },
+    {
+        "name": "SW26",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 9.525,
+        "y": 81.2,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW25",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": -11.725,
+        "y": 83.4,
+        "orientation": 15.0
+    },
+    {
+        "name": "SW24",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 95.25,
+        "y": 80.15,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW23",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 76.2,
+        "y": 75.15,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW22",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 57.15,
+        "y": 49.15,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW21",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 38.1,
+        "y": 45.15,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW20",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 19.05,
+        "y": 57.15,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW19",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 0.0,
+        "y": 62.15,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW18",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 95.25,
+        "y": 61.1,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW17",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 76.2,
+        "y": 56.1,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW16",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 57.15,
+        "y": 30.1,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW15",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 38.1,
+        "y": 26.1,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW14",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 19.05,
+        "y": 38.1,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW13",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 0.0,
+        "y": 43.1,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW12",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 95.25,
+        "y": 42.05,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW11",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 76.2,
+        "y": 37.05,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW10",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 57.15,
+        "y": 11.05,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW9",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 38.1,
+        "y": 7.05,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW8",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 19.05,
+        "y": 19.05,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW7",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 0.0,
+        "y": 24.05,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW6",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 95.25,
+        "y": 23.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW5",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 76.2,
+        "y": 18.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW4",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 57.15,
+        "y": -8.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW3",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 38.1,
+        "y": -12.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW2",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 19.05,
+        "y": 0.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "SW1",
+        "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
+        "x": 0.0,
+        "y": 5.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "D27",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 27.8125,
+        "y": 93.582866,
+        "orientation": 150.0
+    },
+    {
+        "name": "D26",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 9.524999,
+        "y": 89.725,
+        "orientation": 180.0
+    },
+    {
+        "name": "D25",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": -9.518567,
+        "y": 91.634517,
+        "orientation": 195.0
+    },
+    {
+        "name": "D24",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 95.25,
+        "y": 88.675,
+        "orientation": 180.0
+    },
+    {
+        "name": "D23",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 76.2,
+        "y": 83.675,
+        "orientation": 180.0
+    },
+    {
+        "name": "D22",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 57.15,
+        "y": 57.675,
+        "orientation": 180.0
+    },
+    {
+        "name": "D21",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 38.1,
+        "y": 53.675,
+        "orientation": 180.0
+    },
+    {
+        "name": "D20",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 19.05,
+        "y": 65.675,
+        "orientation": 180.0
+    },
+    {
+        "name": "D19",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 0.0,
+        "y": 70.675,
+        "orientation": 180.0
+    },
+    {
+        "name": "D18",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 95.25,
+        "y": 69.625,
+        "orientation": 180.0
+    },
+    {
+        "name": "D17",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 76.2,
+        "y": 64.625,
+        "orientation": 180.0
+    },
+    {
+        "name": "D16",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 57.15,
+        "y": 38.625,
+        "orientation": 180.0
+    },
+    {
+        "name": "D15",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 38.1,
+        "y": 34.625,
+        "orientation": 180.0
+    },
+    {
+        "name": "D14",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 19.05,
+        "y": 46.625,
+        "orientation": 180.0
+    },
+    {
+        "name": "D13",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 0.0,
+        "y": 51.625,
+        "orientation": 180.0
+    },
+    {
+        "name": "D12",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 95.25,
+        "y": 50.574999,
+        "orientation": 180.0
+    },
+    {
+        "name": "D11",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 76.2,
+        "y": 45.574999,
+        "orientation": 180.0
+    },
+    {
+        "name": "D10",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 57.15,
+        "y": 19.575,
+        "orientation": 180.0
+    },
+    {
+        "name": "D9",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 38.1,
+        "y": 15.575,
+        "orientation": 180.0
+    },
+    {
+        "name": "D8",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 19.05,
+        "y": 27.575,
+        "orientation": 180.0
+    },
+    {
+        "name": "D7",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 0.0,
+        "y": 32.575,
+        "orientation": 180.0
+    },
+    {
+        "name": "D6",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 95.25,
+        "y": 31.525,
+        "orientation": 180.0
+    },
+    {
+        "name": "D5",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 76.2,
+        "y": 26.525,
+        "orientation": 180.0
+    },
+    {
+        "name": "D4",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 57.15,
+        "y": 0.524999,
+        "orientation": 180.0
+    },
+    {
+        "name": "D3",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 38.1,
+        "y": -3.475,
+        "orientation": 180.0
+    },
+    {
+        "name": "D2",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 19.05,
+        "y": 8.525,
+        "orientation": 180.0
+    },
+    {
+        "name": "D1",
+        "footprint": "keebio-footprints:Diode-dual",
+        "x": 0.0,
+        "y": 13.525,
+        "orientation": 180.0
+    },
+    {
+        "name": "U2",
+        "footprint": "keebio-footprints:TRRS-PJ-320A-dual",
+        "x": -40.0,
+        "y": 2.0,
+        "orientation": 0.0
+    },
+    {
+        "name": "U1",
+        "footprint": "keebio-footprints:ArduinoProMicro",
+        "x": -24.0,
+        "y": 17.8,
+        "orientation": 270.0
+    },
+    {
+        "name": "R2",
+        "footprint": "keebio-footprints:Resistor-Hybrid",
+        "x": -39.8,
+        "y": 21.2,
+        "orientation": 270.0
+    },
+    {
+        "name": "R1",
+        "footprint": "keebio-footprints:Resistor-Hybrid",
+        "x": -43.3,
+        "y": 21.2,
+        "orientation": 270.0
+    },
+    {
+        "name": "JP2",
+        "footprint": "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm",
+        "x": -36.1,
+        "y": 18.6,
+        "orientation": 180.0
+    },
+    {
+        "name": "JP1",
+        "footprint": "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm",
+        "x": -36.1,
+        "y": 24.4,
+        "orientation": 0.0
+    }
+]

@@ -30,7 +30,7 @@ cover-place:
 
 	scripts/mh_add.py\
 		$(PCB_COVER)\
-		build/pcb/footprint_dump.json\
+		data/pcb/footprint_dump.json\
 		--filter-footprint MountingHole_2.2mm_M2_Pad_Via\
 		--x-lt 0
 
@@ -71,20 +71,20 @@ scad_files=$(addprefix data/case/,\
 	cover.scad\
 	plate.scad\
 )
-$(scad_files): build/pcb/footprint_dump.json data/design/mh_standoff.json $(wildcard case/*.py)
+$(scad_files): data/pcb/footprint_dump.json data/design/mh_standoff.json $(wildcard case/*.py)
 	mkdir -p data/case
 	case/case.py\
-		--kicad-dump build/pcb/footprint_dump.json\
+		--kicad-dump data/pcb/footprint_dump.json\
 		--mh-standoff data/design/mh_standoff.json\
 		-o data/case
 
 
 .PHONY: pcb-dump pcb-place
 
-pcb-dump: build/pcb/footprint_dump.json
+pcb-dump: data/pcb/footprint_dump.json
 
-build/pcb/footprint_dump.json: $(PCB)
-	mkdir -p build/pcb
+data/pcb/footprint_dump.json: $(PCB)
+	mkdir -p data/pcb
 	scripts/dump_footprints.py $< $@
 
 pcb-place:
