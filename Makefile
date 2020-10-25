@@ -50,33 +50,33 @@ plate-place:
 
 case-assembly-watch:
 	watch -n1 make case-assembly
-case-assembly: build/case/assembly.scad
+case-assembly: data/case/assembly.scad
 
-case: $(addprefix build/case/,\
+case: $(addprefix data/case/,\
 	assembly.png\
 	pcb.dxf\
 	plate.dxf\
 	cover.dxf\
 )
 
-build/case/%.png: build/case/%.scad
+data/case/%.png: data/case/%.scad
 	openscad --colorscheme DeepOcean -o $@ $<
 
-build/case/%.dxf: build/case/%.scad
+data/case/%.dxf: data/case/%.scad
 	openscad -o $@ $<
 
-scad_files=$(addprefix build/case/,\
+scad_files=$(addprefix data/case/,\
 	assembly.scad\
 	pcb.scad\
 	cover.scad\
 	plate.scad\
 )
 $(scad_files): build/pcb/footprint_dump.json data/design/mh_standoff.json $(wildcard case/*.py)
-	mkdir -p build/case
+	mkdir -p data/case
 	case/case.py\
 		--kicad-dump build/pcb/footprint_dump.json\
 		--mh-standoff data/design/mh_standoff.json\
-		-o build/case
+		-o data/case
 
 
 .PHONY: pcb-dump pcb-place
