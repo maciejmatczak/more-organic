@@ -42,12 +42,15 @@ plate-place:
 		$(PCB_PLATE)
 
 	scripts/mh_add.py\
-		$(PCB_PLATE)	\
-		data/design/mh_standoff.json
+		$(PCB_PLATE)
+		data/pcb/footprint_dump.json\
+		--filter-footprint MountingHole_2.2mm_M2_Pad_Via\
+		--x-gt 0
 
 	scripts/mh_add.py\
 		$(PCB)\
-		data/design/mh_pcb_to_plate.json
+		data/pcb/footprint_dump.json\
+		--filter-footprint MountingHole_4.3mm_M2_Pad_Via
 
 
 .PHONY: case case-assembly case-assembly-watch
