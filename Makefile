@@ -51,6 +51,9 @@ plate-place:
 case-assembly-watch:
 	watch -n1 make case-assembly
 case-assembly: data/case/assembly.scad
+case-assembly-pcb:
+	make pcb-place
+	make data/case/assembly.scad
 
 case: $(addprefix data/case/,\
 	assembly.png\
@@ -88,6 +91,8 @@ data/pcb/footprint_dump.json: $(PCB)
 	scripts/dump_footprints.py $< $@
 
 pcb-place:
+	make design
+
 	scripts/place_footprints.py\
 		$(PCB)\
 		data/design/sw_and_dio.json

@@ -3,7 +3,7 @@
         "name": "generated",
         "footprint": "MountingHole_2.2mm_M2_Pad_Via",
         "x": 63.675,
-        "y": 61.675,
+        "y": 64.675,
         "orientation": 0.0
     },
     {
@@ -58,23 +58,23 @@
     {
         "name": "SW27",
         "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
-        "x": 32.075,
-        "y": 86.2,
-        "orientation": 330.0
+        "x": 14.05,
+        "y": 81.6,
+        "orientation": 358.0
     },
     {
         "name": "SW26",
         "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
-        "x": 9.525,
-        "y": 81.2,
-        "orientation": 0.0
+        "x": -7.0,
+        "y": 82.9,
+        "orientation": 10.0
     },
     {
         "name": "SW25",
         "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
-        "x": -11.725,
-        "y": 83.4,
-        "orientation": 15.0
+        "x": -27.2,
+        "y": 91.0,
+        "orientation": 28.0
     },
     {
         "name": "SW24",
@@ -94,7 +94,7 @@
         "name": "SW22",
         "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
         "x": 57.15,
-        "y": 49.15,
+        "y": 52.15,
         "orientation": 0.0
     },
     {
@@ -136,7 +136,7 @@
         "name": "SW16",
         "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
         "x": 57.15,
-        "y": 30.1,
+        "y": 33.1,
         "orientation": 0.0
     },
     {
@@ -178,7 +178,7 @@
         "name": "SW10",
         "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
         "x": 57.15,
-        "y": 11.05,
+        "y": 14.05,
         "orientation": 0.0
     },
     {
@@ -220,7 +220,7 @@
         "name": "SW4",
         "footprint": "keyswitches:Kailh_socket_MX_optional_reversible_alt",
         "x": 57.15,
-        "y": -8.0,
+        "y": -5.0,
         "orientation": 0.0
     },
     {
@@ -247,23 +247,23 @@
     {
         "name": "D27",
         "footprint": "keebio-footprints:Diode-dual",
-        "x": 27.8125,
-        "y": 93.582866,
-        "orientation": 150.0
+        "x": 13.752481,
+        "y": 90.119806,
+        "orientation": 178.0
     },
     {
         "name": "D26",
         "footprint": "keebio-footprints:Diode-dual",
-        "x": 9.524999,
-        "y": 89.725,
-        "orientation": 180.0
+        "x": -5.519649,
+        "y": 91.295486,
+        "orientation": 190.0
     },
     {
         "name": "D25",
         "footprint": "keebio-footprints:Diode-dual",
-        "x": -9.518567,
-        "y": 91.634517,
-        "orientation": 195.0
+        "x": -23.197754,
+        "y": 98.527128,
+        "orientation": 208.0
     },
     {
         "name": "D24",
@@ -283,7 +283,7 @@
         "name": "D22",
         "footprint": "keebio-footprints:Diode-dual",
         "x": 57.15,
-        "y": 57.675,
+        "y": 60.675,
         "orientation": 180.0
     },
     {
@@ -325,7 +325,7 @@
         "name": "D16",
         "footprint": "keebio-footprints:Diode-dual",
         "x": 57.15,
-        "y": 38.625,
+        "y": 41.625,
         "orientation": 180.0
     },
     {
@@ -367,7 +367,7 @@
         "name": "D10",
         "footprint": "keebio-footprints:Diode-dual",
         "x": 57.15,
-        "y": 19.575,
+        "y": 22.575,
         "orientation": 180.0
     },
     {
@@ -409,7 +409,7 @@
         "name": "D4",
         "footprint": "keebio-footprints:Diode-dual",
         "x": 57.15,
-        "y": 0.524999,
+        "y": 3.525,
         "orientation": 180.0
     },
     {

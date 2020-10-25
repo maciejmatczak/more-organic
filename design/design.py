@@ -12,7 +12,7 @@ import json
 OFFSET = (0, 0)
 
 COLUMN_OFFSET = [
-    5, 0, -12, -8, 18, 23,
+    5, 0, -12, -5, 18, 23,
 ]  # mm
 U = 19.05  # mm
 
@@ -98,33 +98,31 @@ def design_sw_and_dio():
             design.add(switch)
 
     # thumb left key
-    distance = 2.2
     SW25 = Element(
         name='SW25',
-        x=OFFSET[0] + U * 0 - U/2 - distance,
-        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + distance,
-        orientation=15
+        # x=OFFSET[0] - 27.2,
+        x=OFFSET[0] - 27.2,
+        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + 9.8,
+        orientation=28
     )
     design.add(SW25)
 
     # thumb middle key
     SW26 = Element(
         name='SW26',
-        x=OFFSET[0] + U * 1 - U/2,
-        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4,
-        orientation=33
+        x=OFFSET[0] - 7,
+        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + 1.7,
+        orientation=10
     )
     design.add(SW26)
 
     # thumb right key
-    distance = 3.5
     SW27 = Element(
         name='SW27',
-        x=SW26.x + U,
-        y=SW26.y,
-        orientation=-30
+        x=SW26.x + U + 2,
+        y=SW26.y - 1.3,
+        orientation=-2
     )
-    SW27.move(distance, 5)
     design.add(SW27)
 
     # following up with a diodes

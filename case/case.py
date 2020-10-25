@@ -196,12 +196,13 @@ def case(design_switches, design_diodes, design_other_elements, design_mh_m2,
     m4_screws = color([.3, .3, .3, .4])(m4_screws)
     m2_screws = color([.3, .3, .3, .4])(m2_screws)
 
-    assembly =\
-        pcb +\
-        other_elements_representation + m4_screws + m2_screws +\
-        up(PCB_PLATE_Z)(plate) +\
-        up(PCB_PLATE_Z*2)(cover) +\
-        switch_bboxes + collisions
+    assembly = union()(
+        pcb,
+        other_elements_representation, m4_screws, m2_screws,
+        up(PCB_PLATE_Z)(plate),
+        up(PCB_PLATE_Z*2)(cover),
+        collisions, switch_bboxes
+    )
 
     return assembly, pcb, plate, cover
 
