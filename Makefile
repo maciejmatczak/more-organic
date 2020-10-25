@@ -45,6 +45,10 @@ plate-place:
 		$(PCB_PLATE)	\
 		data/design/mh_standoff.json
 
+	scripts/mh_add.py\
+		$(PCB)\
+		data/design/mh_pcb_to_plate.json
+
 
 .PHONY: case case-assembly case-assembly-watch
 
