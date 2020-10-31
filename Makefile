@@ -53,7 +53,7 @@ plate-place:
 		--filter-footprint MountingHole_4.3mm_M2_Pad_Via
 
 
-.PHONY: case case-assembly case-assembly-watch
+.PHONY: case case-assembly case-assembly-pcb case-assembly-watch
 
 case-assembly-watch:
 	watch -n1 make case-assembly

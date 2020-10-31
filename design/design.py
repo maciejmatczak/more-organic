@@ -12,13 +12,13 @@ import json
 OFFSET = (0, 0)
 
 COLUMN_OFFSET = [
-    5, 0, -12, -5, 18, 23,
+    5, 0, -10, -1, 23, 28,
 ]  # mm
 U = 19.05  # mm
 
 # MOUNTING HOLES
 MH_STANDOFF = []
-Xes = (0, U * 4 + U/2)
+Xes = (0, U * 4 + U/2 - 4)
 Yes = (-12, 98)
 for x in Xes:
     for y in Yes:
@@ -100,28 +100,27 @@ def design_sw_and_dio():
     # thumb left key
     SW25 = Element(
         name='SW25',
-        # x=OFFSET[0] - 27.2,
-        x=OFFSET[0] - 27.2,
-        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + 9.8,
-        orientation=28
+        x=OFFSET[0] - 28,
+        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + 11.6,
+        orientation=27.6
     )
     design.add(SW25)
 
     # thumb middle key
     SW26 = Element(
         name='SW26',
-        x=OFFSET[0] - 7,
-        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + 1.7,
-        orientation=10
+        x=OFFSET[0] - 9.3,
+        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + 2.7,
+        orientation=18
     )
     design.add(SW26)
 
     # thumb right key
     SW27 = Element(
         name='SW27',
-        x=SW26.x + U + 2,
-        y=SW26.y - 1.3,
-        orientation=-2
+        x=OFFSET[0] + 13.4,
+        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + 1.3,
+        orientation=-6.6
     )
     design.add(SW27)
 
