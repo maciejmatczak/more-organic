@@ -5,7 +5,7 @@ PCB_COVER=cover/cover.kicad_pcb
 
 .PHONY: plot
 
-ZIPS=$(addprefix build/fab/make-organic-,\
+ZIPS=$(addprefix FAB/make-organic-,\
 	$(notdir \
 		$(patsubst %.kicad_pcb,%.zip,$(PCB) $(PCB_PLATE) $(PCB_COVER))\
 	)\
@@ -14,7 +14,7 @@ ZIPS=$(addprefix build/fab/make-organic-,\
 plot: $(ZIPS)
 
 .SECONDEXPANSION:
-build/fab/make-organic-%.zip: $$*/$$*.kicad_pcb
+FAB/make-organic-%.zip: $$*/$$*.kicad_pcb
 	mkdir -p $(dir $@)
 	
 	scripts/plot_fab.py $< $(dir $@)$*
@@ -132,4 +132,4 @@ dev:
 
 .PHONY: clean
 clean:
-	rm -rf build
+	rm -rf FAB
