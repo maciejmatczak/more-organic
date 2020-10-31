@@ -1,0 +1,170 @@
+** Drc report for /media/data/projects/more-organic/pcb/pcb.kicad_pcb **
+** Created on 2020-10-31 18:21:02 **
+
+** Found 54 DRC errors **
+ErrType(51): Drilled holes too close together
+    @(9.907 mm, 79.539 mm): Pad of SW27 on All copper layers
+    @(11.461 mm, 77.162 mm): Pad of SW27 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(16.507 mm, 77.746 mm): Pad of SW27 on All copper layers
+    @(17.477 mm, 80.415 mm): Pad of SW27 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(-13.708 mm, 82.662 mm): Pad of SW26 on All copper layers
+    @(-13.285 mm, 79.854 mm): Pad of SW26 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(-8.454 mm, 78.284 mm): Pad of SW26 on All copper layers
+    @(-6.461 mm, 80.307 mm): Pad of SW26 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(-32.553 mm, 92.314 mm): Pad of SW25 on All copper layers
+    @(-32.605 mm, 89.475 mm): Pad of SW25 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(-28.103 mm, 87.121 mm): Pad of SW25 on All copper layers
+    @(-25.800 mm, 88.784 mm): Pad of SW25 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(91.440 mm, 82.610 mm): Pad of SW24 on All copper layers
+    @(92.710 mm, 80.070 mm): Pad of SW24 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(97.790 mm, 80.070 mm): Pad of SW24 on All copper layers
+    @(99.060 mm, 82.610 mm): Pad of SW24 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(72.390 mm, 77.610 mm): Pad of SW23 on All copper layers
+    @(73.660 mm, 75.070 mm): Pad of SW23 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(78.740 mm, 75.070 mm): Pad of SW23 on All copper layers
+    @(80.010 mm, 77.610 mm): Pad of SW23 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(53.340 mm, 53.610 mm): Pad of SW22 on All copper layers
+    @(54.610 mm, 51.070 mm): Pad of SW22 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(59.690 mm, 51.070 mm): Pad of SW22 on All copper layers
+    @(60.960 mm, 53.610 mm): Pad of SW22 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(34.290 mm, 44.610 mm): Pad of SW21 on All copper layers
+    @(35.560 mm, 42.070 mm): Pad of SW21 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(40.640 mm, 42.070 mm): Pad of SW21 on All copper layers
+    @(41.910 mm, 44.610 mm): Pad of SW21 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(15.240 mm, 54.610 mm): Pad of SW20 on All copper layers
+    @(16.510 mm, 52.070 mm): Pad of SW20 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(21.590 mm, 52.070 mm): Pad of SW20 on All copper layers
+    @(22.860 mm, 54.610 mm): Pad of SW20 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(-3.810 mm, 59.610 mm): Pad of SW19 on All copper layers
+    @(-2.540 mm, 57.070 mm): Pad of SW19 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(2.540 mm, 57.070 mm): Pad of SW19 on All copper layers
+    @(3.810 mm, 59.610 mm): Pad of SW19 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(91.440 mm, 63.560 mm): Pad of SW18 on All copper layers
+    @(92.710 mm, 61.020 mm): Pad of SW18 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(97.790 mm, 61.020 mm): Pad of SW18 on All copper layers
+    @(99.060 mm, 63.560 mm): Pad of SW18 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(72.390 mm, 58.560 mm): Pad of SW17 on All copper layers
+    @(73.660 mm, 56.020 mm): Pad of SW17 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(78.740 mm, 56.020 mm): Pad of SW17 on All copper layers
+    @(80.010 mm, 58.560 mm): Pad of SW17 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(53.340 mm, 34.560 mm): Pad of SW16 on All copper layers
+    @(54.610 mm, 32.020 mm): Pad of SW16 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(59.690 mm, 32.020 mm): Pad of SW16 on All copper layers
+    @(60.960 mm, 34.560 mm): Pad of SW16 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(34.290 mm, 25.560 mm): Pad of SW15 on All copper layers
+    @(35.560 mm, 23.020 mm): Pad of SW15 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(40.640 mm, 23.020 mm): Pad of SW15 on All copper layers
+    @(41.910 mm, 25.560 mm): Pad of SW15 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(15.240 mm, 35.560 mm): Pad of SW14 on All copper layers
+    @(16.510 mm, 33.020 mm): Pad of SW14 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(21.590 mm, 33.020 mm): Pad of SW14 on All copper layers
+    @(22.860 mm, 35.560 mm): Pad of SW14 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(-3.810 mm, 40.560 mm): Pad of SW13 on All copper layers
+    @(-2.540 mm, 38.020 mm): Pad of SW13 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(2.540 mm, 38.020 mm): Pad of SW13 on All copper layers
+    @(3.810 mm, 40.560 mm): Pad of SW13 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(91.440 mm, 44.510 mm): Pad of SW12 on All copper layers
+    @(92.710 mm, 41.970 mm): Pad of SW12 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(97.790 mm, 41.970 mm): Pad of SW12 on All copper layers
+    @(99.060 mm, 44.510 mm): Pad of SW12 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(72.390 mm, 39.510 mm): Pad of SW11 on All copper layers
+    @(73.660 mm, 36.970 mm): Pad of SW11 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(78.740 mm, 36.970 mm): Pad of SW11 on All copper layers
+    @(80.010 mm, 39.510 mm): Pad of SW11 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(53.340 mm, 15.510 mm): Pad of SW10 on All copper layers
+    @(54.610 mm, 12.970 mm): Pad of SW10 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(59.690 mm, 12.970 mm): Pad of SW10 on All copper layers
+    @(60.960 mm, 15.510 mm): Pad of SW10 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(34.290 mm, 6.510 mm): Pad of SW9 on All copper layers
+    @(35.560 mm, 3.970 mm): Pad of SW9 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(40.640 mm, 3.970 mm): Pad of SW9 on All copper layers
+    @(41.910 mm, 6.510 mm): Pad of SW9 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(15.240 mm, 16.510 mm): Pad of SW8 on All copper layers
+    @(16.510 mm, 13.970 mm): Pad of SW8 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(21.590 mm, 13.970 mm): Pad of SW8 on All copper layers
+    @(22.860 mm, 16.510 mm): Pad of SW8 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(-3.810 mm, 21.510 mm): Pad of SW7 on All copper layers
+    @(-2.540 mm, 18.970 mm): Pad of SW7 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(2.540 mm, 18.970 mm): Pad of SW7 on All copper layers
+    @(3.810 mm, 21.510 mm): Pad of SW7 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(91.440 mm, 25.460 mm): Pad of SW6 on All copper layers
+    @(92.710 mm, 22.920 mm): Pad of SW6 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(97.790 mm, 22.920 mm): Pad of SW6 on All copper layers
+    @(99.060 mm, 25.460 mm): Pad of SW6 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(72.390 mm, 20.460 mm): Pad of SW5 on All copper layers
+    @(73.660 mm, 17.920 mm): Pad of SW5 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(78.740 mm, 17.920 mm): Pad of SW5 on All copper layers
+    @(80.010 mm, 20.460 mm): Pad of SW5 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(53.340 mm, -3.540 mm): Pad of SW4 on All copper layers
+    @(54.610 mm, -6.080 mm): Pad of SW4 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(59.690 mm, -6.080 mm): Pad of SW4 on All copper layers
+    @(60.960 mm, -3.540 mm): Pad of SW4 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(34.290 mm, -12.540 mm): Pad of SW3 on All copper layers
+    @(35.560 mm, -15.080 mm): Pad of SW3 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(40.640 mm, -15.080 mm): Pad of SW3 on All copper layers
+    @(41.910 mm, -12.540 mm): Pad of SW3 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(15.240 mm, -2.540 mm): Pad of SW2 on All copper layers
+    @(16.510 mm, -5.080 mm): Pad of SW2 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(21.590 mm, -5.080 mm): Pad of SW2 on All copper layers
+    @(22.860 mm, -2.540 mm): Pad of SW2 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(-3.810 mm, 2.460 mm): Pad of SW1 on All copper layers
+    @(-2.540 mm, -0.080 mm): Pad of SW1 on All copper layers
+ErrType(51): Drilled holes too close together
+    @(2.540 mm, -0.080 mm): Pad of SW1 on All copper layers
+    @(3.810 mm, 2.460 mm): Pad of SW1 on All copper layers
+
+** Found 0 unconnected pads **
+
+** End of Report **
