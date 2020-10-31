@@ -42,13 +42,13 @@ plate-place:
 		$(PCB_PLATE)
 
 	scripts/mh_add.py\
-		$(PCB_PLATE)
+		$(PCB_PLATE)\
 		data/pcb/footprint_dump.json\
 		--filter-footprint MountingHole_2.2mm_M2_Pad_Via\
 		--x-gt 0
 
 	scripts/mh_add.py\
-		$(PCB)\
+		$(PCB_PLATE)\
 		data/pcb/footprint_dump.json\
 		--filter-footprint MountingHole_4.3mm_M2_Pad_Via
 
