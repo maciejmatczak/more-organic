@@ -46,7 +46,7 @@ def mh_add(pcb_path: str, placement_config: dict):
     board.Save(board.GetFileName())
 
 
-def filter_config(placement_config, footprint=None, x_lt=None):
+def filter_config(placement_config, footprint=None, x_lt=None, x_gt=None):
     if footprint:
         placement_config = [
             el for el in placement_config if el['footprint'] == footprint
@@ -55,6 +55,10 @@ def filter_config(placement_config, footprint=None, x_lt=None):
     if x_lt is not None:
         placement_config = [
             el for el in placement_config if el['x'] < x_lt
+        ]
+    if x_gt is not None:
+        placement_config = [
+            el for el in placement_config if el['x'] > x_gt
         ]
 
     return placement_config
@@ -82,6 +86,10 @@ if __name__ == '__main__':
         '--x-lt', type=float, default=None,
         help='x lower than'
     )
+    parser.add_argument(
+        '--x-gt', type=float, default=None,
+        help='x greater than'
+    )
 
     args = parser.parse_args()
 
@@ -89,7 +97,8 @@ if __name__ == '__main__':
     placement_config = filter_config(
         placement_config,
         footprint=args.filter_footprint,
-        x_lt=args.x_lt
+        x_lt=args.x_lt,
+        x_gt=args.x_gt
     )
 
     mh_add(
