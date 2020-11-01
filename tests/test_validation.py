@@ -18,6 +18,20 @@ def test_report_is_newer_than_pcb():
         f'than pcb {datetime.datetime.fromtimestamp(pcb_mtime)}'
 
 
+def test_fab_files_are_newer_than_pcb():
+    pcb = Path() / 'pcb' / 'pcb.kicad_pcb'
+    assert pcb.exists()
+
+    pcb_mtime = pcb.lstat().st_mtime
+
+    zips = (Path() / 'FAB').glob('*.zip')
+    newest_zip_mtime = max([zip_.lstat().st_mtime for zip_ in zips])
+
+    assert newest_zip_mtime > pcb_mtime,\
+        f'fab zips are older ({datetime.datetime.fromtimestamp(newest_zip_mtime)} '\
+        f'than pcb {datetime.datetime.fromtimestamp(pcb_mtime)}'
+
+
 @pytest.mark.parametrize('pcb_path, expected_holes_amount', [
     [Path() / 'pcb' / 'pcb.kicad_pcb', 7],
     [Path() / 'cover' / 'cover.kicad_pcb', 3],
