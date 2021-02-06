@@ -8,9 +8,9 @@ OpenSCAD with SolidPython was choosen to support CAD design.
 
 There is a couple of interdigitated parts in this project. Initially, the idea was to define everything in `make` dependencies, but that didn't work out. For example: case depends on switches placement (which are placed with script), but also manually placed elements on a PCB itself (uC, jack, etc). But PCB depends on a case itself, as PCB edge definition comes from it...
 
-Whole workflow ended up as a subset of action from `Makefile`, saved intermediate design files within the repo itself (.scaf, .dxf, .json data dumps).
+Whole workflow ended up as a subset of action from `Makefile`, saved intermediate design files within the repo itself (.scad, .dxf, .json data dumps).
 
-This board might be really similar to quite a few already existing great boards out there. An addition knob would be also nice.
+This board might be really similar to quite a few already existing great boards out there. An additional knob would be also nice.
 
 # Parts of this project
 
@@ -35,7 +35,7 @@ Additionally, a collisions are shown in red (need of a manual validation):
 
 The whole idea for this design is to be kind of _organic_. Edges are naturally created form particular elements being _melted_ with each other. I am proud of that one.
 
-Footprints from KiCAD were "redesigned" in OpenSCAD as well (basic shapes).
+Some footprints from KiCAD were "redesigned" in OpenSCAD as well (basic shapes).
 
 Different coordinate system between this 2 worlds (KiCAD and OpenSCAD) is not fun. Also, KiCAD and it's weird `(0, 0)` placement.
 
