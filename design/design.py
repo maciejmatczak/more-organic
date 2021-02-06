@@ -11,8 +11,17 @@ import json
 
 OFFSET = (0, 0)
 
+# First fabrication. Didn't work out, too aggressive in pinky. And aggressive
+# in total feeling as well.
+# 5, 0, -10, -1, 23, 28,
+#
+# Change at 2021-02-06
+#  - raise the secondary index: 3mm
+#  - pinky - 15mm
+#  - secondary pinky, difference from main = 2mm
+
 COLUMN_OFFSET = [
-    5, 0, -10, -1, 23, 28,
+    3, 0, -10, -1, 8, 10,
 ]  # mm
 U = 19.05  # mm
 
@@ -31,11 +40,6 @@ MH_PCB_TO_PLATE = [
     (U*3.5 + 3, COLUMN_OFFSET[4] - U/2 - 3),
     (U/2 + d, d + U*3.5),
     (U*3.5 - 3, COLUMN_OFFSET[3] + U*3.5 + 3),
-]
-
-MH_PCB_TO_COVER = [
-    (-35, 18),
-    (-25, 36),
 ]
 
 MH_M2_FOOTPRINT = 'MountingHole_2.2mm_M2_Pad_Via'
@@ -159,20 +163,6 @@ def design_mh_standoff():
 def design_mh_pcb_to_plate():
     design = Design()
     for x, y in MH_PCB_TO_PLATE:
-        screw = Element(
-            footprint=MH_M2_FOOTPRINT,
-            x=x,
-            y=y
-        )
-
-        design.add(screw)
-
-    return design
-
-
-def design_mh_pcb_to_cover():
-    design = Design()
-    for x, y in MH_PCB_TO_COVER:
         screw = Element(
             footprint=MH_M2_FOOTPRINT,
             x=x,
