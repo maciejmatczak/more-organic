@@ -33,7 +33,7 @@ def test_fab_files_are_newer_than_pcb():
 
 
 @pytest.mark.parametrize('pcb_path, expected_holes_amount', [
-    [Path() / 'pcb' / 'pcb.kicad_pcb', 7],
+    [Path() / 'pcb' / 'pcb.kicad_pcb', 6],
     [Path() / 'cover' / 'cover.kicad_pcb', 3],
     [Path() / 'plate' / 'plate.kicad_pcb', 8],
 ])
