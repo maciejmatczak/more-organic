@@ -10,14 +10,7 @@
         "name": "",
         "footprint": "MountingHole_2.2mm_M2_Pad_Via",
         "x": 69.675,
-        "y": 10.475,
-        "orientation": 0
-    },
-    {
-        "name": "",
-        "footprint": "MountingHole_2.2mm_M2_Pad_Via",
-        "x": 12.025,
-        "y": 69.175,
+        "y": -8.525,
         "orientation": 0
     },
     {

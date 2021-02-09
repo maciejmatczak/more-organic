@@ -10,7 +10,7 @@
         "name": "",
         "footprint": "MountingHole_4.3mm_M4_Pad_Via",
         "x": 0,
-        "y": 98,
+        "y": 94,
         "orientation": 0
     },
     {
@@ -24,7 +24,7 @@
         "name": "",
         "footprint": "MountingHole_4.3mm_M4_Pad_Via",
         "x": 81.72500000000001,
-        "y": 98,
+        "y": 94,
         "orientation": 0
     }
 ]

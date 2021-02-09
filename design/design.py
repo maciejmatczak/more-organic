@@ -11,34 +11,36 @@ import json
 
 OFFSET = (0, 0)
 
+# 2021-02-06
+# 5, 0, -10, -1, 23, 28,
 # First fabrication. Didn't work out, too aggressive in pinky. And aggressive
 # in total feeling as well.
-# 5, 0, -10, -1, 23, 28,
 #
-# Change at 2021-02-06
 #  - raise the secondary index: 3mm
 #  - pinky - 15mm
 #  - secondary pinky, difference from main = 2mm
+#
+# That results in 2, 0, -10, -2, 8, 10. I am going to divide it by half to go
+# easy on first columnar stagger.
 
 COLUMN_OFFSET = [
-    3, 0, -10, -1, 8, 10,
+    2, 0, -10, -2, 8, 10,
 ]  # mm
+COLUMN_OFFSET = [i/2 for i in COLUMN_OFFSET]
 U = 19.05  # mm
 
 # MOUNTING HOLES
 MH_STANDOFF = []
 Xes = (0, U * 4 + U/2 - 4)
-Yes = (-12, 98)
+Yes = (-12, 94)
 for x in Xes:
     for y in Yes:
         MH_STANDOFF.append((x, y))
 
 # helper for lower left M2 screws
-d = (COLUMN_OFFSET[0]-COLUMN_OFFSET[1])/2
 MH_PCB_TO_PLATE = [
     (U*1.5 - 3, COLUMN_OFFSET[1] - U/2 - 3),
     (U*3.5 + 3, COLUMN_OFFSET[4] - U/2 - 3),
-    (U/2 + d, d + U*3.5),
     (U*3.5 - 3, COLUMN_OFFSET[3] + U*3.5 + 3),
 ]
 
@@ -105,8 +107,8 @@ def design_sw_and_dio():
     SW25 = Element(
         name='SW25',
         x=OFFSET[0] - 28,
-        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + 11.6,
-        orientation=27.6
+        y=OFFSET[1] + COLUMN_OFFSET[0] + U * 4 + 14,
+        orientation=35
     )
     design.add(SW25)
 
